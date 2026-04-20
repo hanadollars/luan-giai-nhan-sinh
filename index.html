@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bộ Luận Giải Nhân Sinh — Góc Tĩnh Lặng | Hanadola</title>
+<meta name="description" content="6 luận giải sâu sắc về bản chất con người, cảm xúc, mối quan hệ, quyền lực, tự do và ý nghĩa sống. Nhận tài liệu ngay sau thanh toán.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0C0C12; --bg2:#111119; --bg3:#16161F;
+  --gold:#C9A84C; --gold2:#E0BB6A; --gold3:#F5D78E;
+  --teal:#1E6B5A; --teal2:#2A8A72;
+  --red:#8B2020; --red2:#A83030;
+  --paper:#F5F0E8; --text:rgba(245,240,232,0.88);
+  --muted:rgba(245,240,232,0.42); --muted2:rgba(245,240,232,0.22);
+  --border:rgba(201,168,76,0.16); --border2:rgba(255,255,255,0.07);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Be Vietnam Pro',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.75;overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.018;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}
+
+/* ── MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:1000;
+  background:rgba(8,8,14,0.95);backdrop-filter:blur(12px);
+  align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:var(--bg2);border:1px solid var(--border);border-top:3px solid var(--gold);
+  padding:40px 36px;max-width:500px;width:92%;position:relative;
+  max-height:92vh;overflow-y:auto;animation:popIn .3s ease;}
+@keyframes popIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+.modal-close{position:absolute;top:14px;right:18px;background:none;border:none;
+  color:var(--muted);font-size:22px;cursor:pointer;line-height:1;}
+.modal-close:hover{color:var(--paper);}
+
+/* Modal step indicators */
+.modal-steps{display:flex;gap:8px;margin-bottom:28px;align-items:center;}
+.ms{width:28px;height:4px;background:var(--border2);border-radius:2px;transition:background .3s;}
+.ms.active{background:var(--gold);}
+
+/* Step 1 — form */
+.step-1{}
+.modal-pkg-label{display:inline-block;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold2);background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);
+  padding:4px 14px;border-radius:20px;margin-bottom:16px;}
+.modal-title{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--paper);margin-bottom:4px;}
+.modal-sub{font-size:13px;color:var(--muted);margin-bottom:24px;}
+.m-group{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.m-label{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold2);}
+.m-input{background:rgba(255,255,255,0.04);border:1px solid var(--border2);color:var(--text);
+  padding:11px 14px;font-family:var(--sans);font-size:14px;outline:none;
+  transition:border-color .2s;width:100%;border-radius:3px;}
+.m-input:focus{border-color:var(--gold);}
+.m-price-summary{background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);
+  border-radius:6px;padding:14px 18px;margin-bottom:20px;
+  display:flex;justify-content:space-between;align-items:center;}
+.mps-label{font-size:12px;color:var(--muted);}
+.mps-price{font-family:var(--serif);font-size:28px;font-weight:700;color:var(--gold2);}
+.m-submit{width:100%;padding:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border:none;color:var(--bg);font-family:var(--sans);font-size:14px;font-weight:700;
+  cursor:pointer;letter-spacing:.5px;transition:opacity .2s;border-radius:3px;margin-top:4px;}
+.m-submit:hover{opacity:.9;}
+.m-submit:disabled{opacity:.6;cursor:not-allowed;}
+.m-note{font-size:11px;color:var(--muted2);text-align:center;margin-top:10px;line-height:1.6;}
+
+/* Step 2 — QR */
+.step-2{display:none;text-align:center;}
+.s2-order{font-size:11px;color:var(--muted);margin-bottom:4px;}
+.s2-code{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--gold2);margin-bottom:20px;}
+.s2-qr{width:180px;height:180px;border:3px solid var(--border);padding:6px;background:#fff;
+  border-radius:8px;margin:0 auto 16px;}
+.s2-qr img{width:100%;height:100%;display:block;}
+.s2-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0;text-align:left;}
+.s2-info-item{background:var(--bg3);border:1px solid var(--border2);border-radius:4px;padding:10px 12px;}
+.s2-info-label{font-size:10px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px;}
+.s2-info-val{font-size:13px;color:var(--paper);font-weight:500;}
+.s2-desc-box{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);
+  border-radius:4px;padding:10px 14px;margin:10px 0;font-size:13px;}
+.s2-desc-label{font-size:10px;color:var(--muted);margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em;}
+.s2-desc-val{color:var(--gold2);font-weight:600;font-size:15px;}
+.s2-status{display:flex;align-items:center;justify-content:center;gap:8px;
+  font-size:13px;color:var(--muted);margin-top:12px;}
+.s2-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* Step 3 — success */
+.step-3{display:none;text-align:center;padding:16px 0;}
+.s3-icon{font-size:52px;margin-bottom:16px;}
+.s3-title{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--paper);margin-bottom:8px;}
+.s3-sub{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:24px;}
+.s3-btn{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:var(--bg);padding:14px 36px;font-size:14px;font-weight:700;
+  text-decoration:none;border-radius:3px;letter-spacing:.5px;}
+
+/* ── STICKY NAV ── */
+.snav{position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(12,12,18,0.96);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);padding:12px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  transform:translateY(-100%);transition:transform .35s ease;}
+.snav.show{transform:translateY(0)}
+.snav-title{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--paper)}
+.snav-cta{background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:var(--bg);font-size:11px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;padding:9px 22px;
+  border-radius:2px;cursor:pointer;border:none;transition:opacity .2s}
+.snav-cta:hover{opacity:.88}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:translateY(0)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:80px 40px 60px;background:var(--bg);
+  background-image:
+    radial-gradient(ellipse 65% 55% at 85% 35%,rgba(139,32,32,.22) 0%,transparent 65%),
+    radial-gradient(ellipse 50% 60% at 10% 75%,rgba(42,138,114,.08) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 90%,rgba(201,168,76,.06) 0%,transparent 55%);
+  position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,255,255,.008) 60px,rgba(255,255,255,.008) 61px);
+  pointer-events:none;}
+.hero-inner{max-width:1100px;width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:80px;align-items:center}
+
+.h-eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold2);margin-bottom:20px;display:flex;align-items:center;gap:10px;
+  animation:fadeUp .8s ease both;}
+.h-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold2)}
+.hero-title{font-family:var(--serif);font-size:clamp(44px,5.5vw,74px);
+  font-weight:300;line-height:1.05;color:var(--paper);margin-bottom:12px;
+  animation:fadeUp .8s ease .1s both;}
+.hero-title em{font-style:italic;color:var(--gold2);display:block}
+.hero-sub{font-family:var(--serif);font-size:17px;font-style:italic;
+  color:rgba(245,240,232,.5);margin-bottom:32px;line-height:1.65;
+  animation:fadeUp .8s ease .2s both;}
+.hero-price-teaser{display:flex;align-items:center;gap:16px;margin-bottom:32px;animation:fadeUp .8s ease .25s both;}
+.hpt-from{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.hpt-price{font-family:var(--serif);font-size:44px;font-weight:700;color:var(--paper);line-height:1}
+.hpt-vnd{font-size:16px;color:var(--muted);font-weight:300}
+.hpt-badge{background:rgba(139,32,32,.3);border:1px solid rgba(139,32,32,.5);
+  color:#ff9999;font-size:10px;font-weight:600;letter-spacing:1px;
+  padding:5px 12px;border-radius:20px;text-transform:uppercase}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .8s ease .3s both}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:var(--bg);font-size:12px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;padding:16px 36px;
+  border-radius:2px;text-decoration:none;display:inline-block;border:none;cursor:pointer;
+  transition:all .25s;box-shadow:0 4px 20px rgba(201,168,76,.3);animation:pulse 3s ease infinite;}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(201,168,76,.45);animation:none}
+.btn-ghost-light{border:1px solid rgba(255,255,255,.18);color:rgba(245,240,232,.7);
+  font-size:12px;letter-spacing:1px;text-transform:uppercase;
+  padding:16px 32px;border-radius:2px;text-decoration:none;
+  display:inline-block;transition:all .25s;background:none;}
+.btn-ghost-light:hover{border-color:var(--gold);color:var(--gold2);transform:translateY(-1px)}
+
+/* Hero right */
+.hero-right{display:flex;flex-direction:column;gap:14px;animation:fadeUp .8s ease .15s both}
+.book-3d{background:linear-gradient(145deg,#1a1420,#0e0c18);
+  border:1px solid rgba(201,168,76,.22);border-radius:4px 12px 12px 4px;
+  box-shadow:-10px 0 0 #080610,-12px 6px 40px rgba(0,0,0,.9),
+    6px 6px 48px rgba(42,138,114,.15),0 0 80px rgba(201,168,76,.05);
+  padding:40px 32px;position:relative;overflow:hidden;animation:floatY 6s ease infinite;}
+.book-3d::before{content:'';position:absolute;top:0;left:0;width:8px;height:100%;
+  background:linear-gradient(180deg,#28203A,#1a1428,#28203A);
+  border-right:1px solid rgba(201,168,76,.12);}
+.book-3d::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--red),var(--gold),var(--teal2));}
+.book-brand{font-size:8px;letter-spacing:4px;text-transform:uppercase;
+  color:rgba(201,168,76,.45);text-align:center;margin-bottom:28px;padding-left:8px}
+.book-deco{width:120px;height:120px;margin:0 auto 24px;position:relative;}
+.book-deco-circle{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(139,32,32,.28);}
+.book-deco-circle:nth-child(2){inset:14px;border-color:rgba(201,168,76,.22)}
+.book-deco-circle:nth-child(3){inset:28px;border-color:rgba(42,138,114,.2)}
+.book-deco-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:40px;}
+.book-title-area{text-align:center;padding-left:8px}
+.bt-pre{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(245,240,232,.28);margin-bottom:6px}
+.bt-main{font-family:var(--serif);font-size:22px;font-weight:300;color:rgba(245,240,232,.9);line-height:1.1;margin-bottom:4px}
+.bt-sub{font-family:var(--serif);font-size:28px;font-weight:700;color:var(--gold2);line-height:1.1}
+.bt-tagline{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.28);margin-top:12px}
+.book-bottom-bar{position:absolute;bottom:0;left:8px;right:0;height:3px;
+  background:linear-gradient(90deg,var(--red),var(--gold),var(--teal2));}
+.proof-strip{display:flex;gap:10px;flex-wrap:wrap;}
+.proof-item{flex:1;min-width:90px;background:rgba(245,240,232,.03);
+  border:1px solid var(--border2);border-radius:6px;padding:14px 12px;text-align:center;}
+.proof-num{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--gold2);line-height:1;margin-bottom:3px}
+.proof-lbl{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted2)}
+
+/* ── TRUST BAR ── */
+.trust-bar{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:20px 40px;}
+.trust-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:center;
+  gap:40px;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);}
+.trust-icon{font-size:18px;}
+
+/* ── SECTIONS ── */
+.s-inner{max-width:1000px;margin:0 auto}
+.s-eye{font-size:10px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.s-title{font-family:var(--serif);font-size:clamp(26px,3.8vw,44px);font-weight:300;line-height:1.2;color:var(--paper)}
+.s-title em{font-style:italic;color:var(--gold2)}
+.s-title-dark{color:var(--paper)}
+.sdiv{width:52px;height:2px;background:var(--gold);margin:16px 0 32px;opacity:.6;}
+
+/* ── WHY ── */
+.why-section{padding:90px 40px;background:var(--bg2);}
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:40px}
+.pain-card{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;
+  padding:26px 24px;position:relative;overflow:hidden;
+  transition:transform .25s,border-color .25s;}
+.pain-card:hover{transform:translateY(-3px);border-color:var(--border);}
+.pain-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--red),var(--gold));transform:scaleX(0);
+  transition:transform .3s;transform-origin:left;}
+.pain-card:hover::before{transform:scaleX(1)}
+.pain-icon{font-size:26px;margin-bottom:12px;display:block}
+.pain-title{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--paper);margin-bottom:6px}
+.pain-body{font-size:13px;color:var(--muted);line-height:1.75}
+
+/* ── TRANSFORMATION ── */
+.transform-section{padding:80px 40px;background:var(--bg);}
+.transform-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px;max-width:900px;margin-left:auto;margin-right:auto;}
+.tf-before,.tf-after{padding:28px 26px;border-radius:8px;}
+.tf-before{background:rgba(139,32,32,.08);border:1px solid rgba(139,32,32,.2);}
+.tf-after{background:rgba(42,138,114,.08);border:1px solid rgba(42,138,114,.25);}
+.tf-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;font-weight:600;}
+.tf-before .tf-label{color:rgba(255,120,120,.6);}
+.tf-after .tf-label{color:var(--teal2);}
+.tf-item{display:flex;gap:10px;font-size:13px;color:var(--muted);margin-bottom:10px;align-items:flex-start;line-height:1.6;}
+.tf-item::before{flex-shrink:0;margin-top:2px;font-size:14px;}
+.tf-before .tf-item::before{content:'✗';color:rgba(255,120,120,.5);}
+.tf-after .tf-item::before{content:'✓';color:var(--teal2);}
+
+/* ── CONTENT ── */
+.content-section{padding:90px 40px;background:var(--bg2);}
+.parts-list{display:flex;flex-direction:column;gap:2px;margin-top:36px}
+.part-row{display:flex;align-items:flex-start;gap:20px;
+  background:var(--bg3);border:1px solid var(--border2);padding:22px 26px;
+  transition:all .2s;cursor:default;}
+.part-row:first-child{border-radius:8px 8px 0 0}
+.part-row:last-child{border-radius:0 0 8px 8px}
+.part-row:hover{background:rgba(201,168,76,.05);border-color:var(--border);}
+.part-row:hover .prow-num{color:var(--gold)}
+.prow-num{font-family:var(--serif);font-size:36px;font-weight:700;
+  color:rgba(201,168,76,.15);line-height:1;flex-shrink:0;width:48px;transition:color .2s;}
+.prow-kw{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.prow-title{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--paper);margin-bottom:4px}
+.prow-desc{font-size:13px;color:var(--muted);line-height:1.65}
+.prow-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.prow-tag{font-size:10px;color:var(--gold);
+  background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);
+  padding:2px 10px;border-radius:20px;}
+
+/* ── EXCERPT ── */
+.excerpt-section{padding:90px 40px;background:var(--bg);
+  background-image:radial-gradient(ellipse 60% 50% at 30% 50%,rgba(139,32,32,.1),transparent 65%);}
+.excerpts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:36px}
+.exc-card{background:var(--bg2);border:1px solid var(--border2);
+  border-radius:8px;padding:26px 24px;border-left:3px solid var(--red);
+  transition:border-color .25s,transform .25s;}
+.exc-card:hover{border-left-color:var(--gold);transform:translateY(-3px)}
+.exc-part{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);margin-bottom:10px}
+.exc-text{font-family:var(--serif);font-style:italic;font-size:15.5px;
+  color:rgba(245,240,232,.85);line-height:1.65;margin-bottom:12px;}
+.exc-insight{font-size:12.5px;color:var(--muted);line-height:1.65}
+.exc-insight::before{content:'→ ';color:var(--gold)}
+
+/* ── FORMAT ── */
+.format-section{padding:80px 40px;background:var(--bg2);}
+.format-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:36px}
+.fmt-card{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;
+  padding:28px 24px;text-align:center;transition:transform .25s,border-color .25s;}
+.fmt-card:hover{transform:translateY(-4px);border-color:var(--border);}
+.fmt-icon{font-size:36px;margin-bottom:14px;display:block}
+.fmt-name{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--paper);margin-bottom:6px}
+.fmt-desc{font-size:13px;color:var(--muted);line-height:1.7}
+
+/* ── PRICING ── */
+.pricing-section{padding:100px 40px;background:var(--bg);
+  background-image:radial-gradient(ellipse 60% 55% at 50% 50%,rgba(201,168,76,.05),transparent 65%);}
+.countdown-bar{max-width:580px;margin:0 auto 48px;
+  background:rgba(139,32,32,.12);border:1px solid rgba(139,32,32,.28);
+  border-radius:8px;padding:16px 24px;
+  display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;}
+.cd-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.cd-units{display:flex;align-items:center;gap:6px}
+.cd-block{text-align:center}
+.cd-num{font-family:var(--serif);font-size:32px;font-weight:700;color:var(--paper);
+  background:rgba(255,255,255,.06);border:1px solid var(--border2);
+  border-radius:4px;padding:4px 10px;display:block;min-width:52px;line-height:1.2;}
+.cd-lbl2{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);display:block;margin-top:3px}
+.cd-sep{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--red);margin-bottom:14px}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;margin-top:0;max-width:1000px;margin-left:auto;margin-right:auto;align-items:start;}
+.price-card{background:var(--bg2);border:1px solid var(--border2);
+  border-radius:12px;padding:32px 28px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s;}
+.price-card:hover{transform:translateY(-6px);border-color:var(--border);}
+.price-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  opacity:0;transition:opacity .3s;background:linear-gradient(90deg,var(--red),var(--gold),var(--teal2));}
+.price-card:hover::after,.price-card.featured::after{opacity:1}
+.price-card.featured{border-color:rgba(201,168,76,.35);background:rgba(201,168,76,.04);transform:translateY(-4px);}
+.pc-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:20px;}
+.pc-badge.popular{background:var(--gold);color:var(--bg)}
+.pc-badge.basic{background:rgba(245,240,232,.08);color:var(--muted)}
+.pc-badge.combo{background:var(--red);color:#fff}
+.pc-name{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--paper);margin-bottom:6px}
+.pc-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:24px}
+.pc-price{font-family:var(--serif);font-size:52px;font-weight:700;
+  color:var(--paper);line-height:1;letter-spacing:-1px;margin-bottom:4px}
+.pc-price span{font-size:20px;font-weight:300;color:var(--muted)}
+.pc-unit{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted2);margin-bottom:24px}
+.pc-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.pc-features li{display:flex;align-items:flex-start;gap:10px;
+  font-size:13.5px;color:rgba(245,240,232,.72);line-height:1.55}
+.pc-features li::before{content:'✓';color:var(--gold2);font-weight:700;flex-shrink:0;margin-top:1px}
+.pc-cta{display:block;text-align:center;text-decoration:none;
+  font-family:var(--sans);font-size:13px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;padding:15px;
+  border-radius:4px;transition:all .25s;cursor:pointer;border:none;width:100%;}
+.pc-cta.gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--bg);
+  box-shadow:0 4px 16px rgba(201,168,76,.25);}
+.pc-cta.gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.4)}
+.pc-cta.outline{border:1px solid rgba(255,255,255,.15);color:var(--muted);background:none;}
+.pc-cta.outline:hover{border-color:var(--gold);color:var(--gold2)}
+.pc-guarantee{text-align:center;font-size:11px;color:var(--muted2);
+  margin-top:12px;display:flex;align-items:center;justify-content:center;gap:5px;}
+
+/* ── REVIEWS ── */
+.reviews-section{padding:80px 40px;background:var(--bg2);}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:36px}
+.rev-card{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:28px 24px;
+  transition:border-color .2s;}
+.rev-card:hover{border-color:var(--border);}
+.stars{color:var(--gold2);font-size:13px;letter-spacing:2px;margin-bottom:12px}
+.rev-text{font-family:var(--serif);font-style:italic;font-size:15px;
+  color:rgba(245,240,232,.82);line-height:1.7;margin-bottom:18px}
+.rev-author{display:flex;align-items:center;gap:10px}
+.rev-av{width:36px;height:36px;border-radius:50%;
+  background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:14px;font-weight:700;color:var(--gold2);flex-shrink:0;}
+.rev-name{font-size:13px;font-weight:500;color:var(--paper)}
+.rev-role{font-size:11px;color:var(--muted)}
+
+/* ── FAQ ── */
+.faq-section{padding:80px 40px;background:var(--bg);}
+.faq-list{margin-top:36px;max-width:700px;margin-left:auto;margin-right:auto}
+.faq-item{border-bottom:1px solid var(--border2)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;
+  padding:20px 0;cursor:pointer;font-size:14.5px;font-weight:500;
+  color:var(--paper);gap:16px;user-select:none;background:none;border:none;width:100%;text-align:left;}
+.faq-q:hover{color:var(--gold2);}
+.faq-icon{font-size:20px;font-weight:300;color:var(--gold);flex-shrink:0;transition:transform .3s}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-a{font-size:13.5px;color:var(--muted);line-height:1.85;padding-bottom:20px;display:none}
+.faq-item.open .faq-a{display:block}
+
+/* ── FINAL CTA ── */
+.final-cta{padding:110px 40px;text-align:center;background:var(--bg);
+  background-image:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(201,168,76,.07),transparent 65%);
+  position:relative;overflow:hidden;}
+.final-cta::before,.final-cta::after{content:'';position:absolute;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,168,76,.2),transparent);}
+.final-cta::before{top:0}.final-cta::after{bottom:0}
+.fc-quote{font-family:var(--serif);font-style:italic;
+  font-size:clamp(18px,2.8vw,28px);font-weight:300;
+  color:var(--muted);max-width:640px;margin:0 auto 48px;line-height:1.55;}
+.fc-quote strong{font-weight:700;font-style:normal;color:var(--paper)}
+.fc-cta-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
+
+/* ── POLICIES ── */
+.policy-section{padding:60px 40px;background:var(--bg2);border-top:1px solid var(--border2);}
+.policy-inner{max-width:1000px;margin:0 auto}
+.policy-tabs{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.pol-tab{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  padding:9px 20px;border-radius:4px;cursor:pointer;border:1px solid var(--border2);
+  color:var(--muted);background:transparent;transition:all .2s;}
+.pol-tab.active{background:var(--red);border-color:var(--red);color:#fff}
+.pol-content{display:none}
+.pol-content.active{display:block}
+.pol-title{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--paper);margin-bottom:6px}
+.pol-date{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-bottom:20px}
+.pol-body{display:flex;flex-direction:column;gap:16px}
+.pol-item{background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:18px 22px}
+.pol-item-title{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--gold2);margin-bottom:6px}
+.pol-item-body{font-size:13.5px;color:var(--muted);line-height:1.8}
+.pol-steps{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.pol-step{display:flex;gap:12px;align-items:flex-start}
+.ps-num{background:rgba(139,32,32,.25);border:1px solid rgba(139,32,32,.35);
+  color:#ff9999;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;flex-shrink:0;}
+.ps-text{font-size:13px;color:var(--muted);line-height:1.65}
+
+/* ── COMPANY ── */
+.company-section{padding:44px 40px;background:var(--bg);border-top:1px solid var(--border2)}
+.company-inner{max-width:1000px;margin:0 auto}
+.co-title{font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted2);margin-bottom:20px;text-align:center}
+.co-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:20px}
+.co-item{background:var(--bg3);border:1px solid var(--border2);border-radius:5px;padding:14px 18px}
+.co-lbl{font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-bottom:4px}
+.co-val{font-size:13px;color:var(--muted);line-height:1.5}
+.co-legal{font-size:11.5px;color:var(--muted2);line-height:1.7;text-align:center;
+  max-width:800px;margin:0 auto;padding-top:16px;border-top:1px solid var(--border2)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .snav{padding:11px 20px}
+  .hero{padding:80px 20px 60px}.hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero-right{order:-1}.book-3d{max-width:320px;margin:0 auto}
+  .why-section,.transform-section,.content-section,.excerpt-section,
+  .format-section,.pricing-section,.reviews-section,.faq-section,
+  .policy-section,.company-section,.final-cta{padding:60px 20px}
+  .transform-grid{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr}.price-card.featured{transform:none}
+  .trust-bar{padding:16px 20px}.trust-inner{gap:20px}
+  .modal-box{padding:28px 22px}
+}
+@media(max-width:500px){
+  .hero-ctas{flex-direction:column}.btn-gold,.btn-ghost-light{text-align:center}
+  .co-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- MODAL THANH TOÁN -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-steps">
+      <div class="ms active" id="ms1"></div>
+      <div class="ms" id="ms2"></div>
+      <div class="ms" id="ms3"></div>
+    </div>
+
+    <!-- STEP 1: Form -->
+    <div class="step-1" id="step1">
+      <div class="modal-pkg-label" id="modal-pkg-label">Bộ Combo HTML + MP3</div>
+      <div class="modal-title">Thông tin nhận tài liệu</div>
+      <div class="modal-sub">Điền đúng email để nhận tài liệu ngay sau thanh toán.</div>
+      <div class="m-group">
+        <label class="m-label">Họ và tên *</label>
+        <input class="m-input" type="text" id="m-name" placeholder="Nguyễn Văn A">
+      </div>
+      <div class="m-group">
+        <label class="m-label">Email *</label>
+        <input class="m-input" type="email" id="m-email" placeholder="email@gmail.com">
+      </div>
+      <div class="m-group">
+        <label class="m-label">Số điện thoại *</label>
+        <input class="m-input" type="tel" id="m-phone" placeholder="09xx.xxx.xxx">
+      </div>
+      <div class="m-price-summary">
+        <div class="mps-label" id="modal-pkg-name">Bộ Combo HTML + MP3</div>
+        <div class="mps-price" id="modal-price">399<span style="font-size:16px;font-weight:300;color:var(--muted)">k</span></div>
+      </div>
+      <button class="m-submit" id="m-btn" onclick="submitOrder()">Tiếp tục — Thanh toán →</button>
+      <div class="m-note">🔒 Thông tin bảo mật · Nhận tài liệu tức thì · Hóa đơn điện tử tự động</div>
+    </div>
+
+    <!-- STEP 2: QR -->
+    <div class="step-2" id="step2">
+      <div class="s2-order">Mã đơn hàng</div>
+      <div class="s2-code" id="s2-ordercode">LGNS----</div>
+      <div class="s2-qr"><img id="s2-qr-img" src="" alt="QR Thanh toán"></div>
+      <div class="s2-info-grid">
+        <div class="s2-info-item"><div class="s2-info-label">Ngân hàng</div><div class="s2-info-val">ACB</div></div>
+        <div class="s2-info-item"><div class="s2-info-label">Số tài khoản</div><div class="s2-info-val" id="s2-account">20176968</div></div>
+        <div class="s2-info-item"><div class="s2-info-label">Chủ tài khoản</div><div class="s2-info-val" style="font-size:11px">HANADOLA MEDIA AND TECHNOLOGY</div></div>
+        <div class="s2-info-item"><div class="s2-info-label">Số tiền</div><div class="s2-info-val" id="s2-amount" style="color:var(--gold2);font-weight:700">399.000 ₫</div></div>
+      </div>
+      <div class="s2-desc-box">
+        <div class="s2-desc-label">Nội dung chuyển khoản</div>
+        <div class="s2-desc-val" id="s2-desc">LGNS LGNS----</div>
+      </div>
+      <div class="s2-status"><div class="s2-dot"></div>Đang chờ xác nhận thanh toán...</div>
+    </div>
+
+    <!-- STEP 3: Success -->
+    <div class="step-3" id="step3">
+      <div class="s3-icon">✅</div>
+      <div class="s3-title">Thanh toán thành công!</div>
+      <div class="s3-sub">Tài liệu đã được gửi về email <strong id="s3-email" style="color:var(--gold2)"></strong>.<br>Kiểm tra cả hộp thư Spam nếu không thấy sau 5 phút.<br>Hóa đơn điện tử sẽ được gửi kèm trong email.</div>
+      <a href="mailto:admin@hanadola.com" class="s3-btn">Cần hỗ trợ? Liên hệ ngay</a>
+    </div>
+  </div>
+</div>
+
+<!-- STICKY NAV -->
+<div class="snav" id="snav">
+  <span class="snav-title">Bộ Luận Giải Nhân Sinh</span>
+  <button class="snav-cta" onclick="openModal('combo')">Sở hữu ngay →</button>
+</div>
+
+<!-- ════ HERO ════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="h-eyebrow">Góc Tĩnh Lặng · Hanadola Media &amp; Technology</div>
+      <h1 class="hero-title">Bộ Luận Giải<br><em>Nhân Sinh</em></h1>
+      <p class="hero-sub">Sáu luận giải sâu sắc về bản chất con người, cảm xúc,<br>mối quan hệ, quyền lực, tự do và ý nghĩa sống.</p>
+      <div class="hero-price-teaser">
+        <div>
+          <div class="hpt-from">Chỉ từ</div>
+          <div class="hpt-price">299<span class="hpt-vnd">k</span></div>
+        </div>
+        <div class="hpt-badge">🔥 Ưu đãi có hạn</div>
+      </div>
+      <div class="hero-ctas">
+        <button class="btn-gold" onclick="openModal('combo')">Sở hữu ngay — Xem giá →</button>
+        <a href="#content" class="btn-ghost-light">Xem nội dung trước</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="book-3d">
+        <div class="book-brand">Góc Tĩnh Lặng · Hanadola</div>
+        <div class="book-deco">
+          <div class="book-deco-circle"></div>
+          <div class="book-deco-circle"></div>
+          <div class="book-deco-circle"></div>
+          <div class="book-deco-center">🪞</div>
+        </div>
+        <div class="book-title-area">
+          <div class="bt-pre">Bộ tài liệu số</div>
+          <div class="bt-main">Luận Giải</div>
+          <div class="bt-sub">Nhân Sinh</div>
+          <div class="bt-tagline">6 luận giải · Lý thuyết · Ví dụ · Thực hành</div>
+        </div>
+        <div class="book-bottom-bar"></div>
+      </div>
+      <div class="proof-strip">
+        <div class="proof-item"><div class="proof-num">6</div><div class="proof-lbl">Luận giải</div></div>
+        <div class="proof-item"><div class="proof-num">30+</div><div class="proof-lbl">Luận điểm</div></div>
+        <div class="proof-item"><div class="proof-num">60+</div><div class="proof-lbl">Ví dụ thực tế</div></div>
+        <div class="proof-item"><div class="proof-num">3h+</div><div class="proof-lbl">Audio</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="trust-icon">⚡</span>Nhận tài liệu tức thì sau thanh toán</div>
+    <div class="trust-item"><span class="trust-icon">🔒</span>Thanh toán bảo mật qua SePay</div>
+    <div class="trust-item"><span class="trust-icon">🧾</span>Hóa đơn điện tử tự động</div>
+    <div class="trust-item"><span class="trust-icon">♾️</span>Sở hữu vĩnh viễn</div>
+  </div>
+</div>
+
+<!-- ════ VÌ SAO ════ -->
+<section class="why-section">
+  <div class="s-inner">
+    <p class="s-eye rv">Tại sao tài liệu này tồn tại</p>
+    <h2 class="s-title rv">Bạn có đang nhận ra <em>chính mình</em><br>trong những tình huống này?</h2>
+    <div class="sdiv rv"></div>
+    <div class="pain-grid">
+      <div class="pain-card rv"><span class="pain-icon">😶</span><div class="pain-title">Bị người khác làm cho bất ngờ liên tục</div><div class="pain-body">Bạn không hiểu tại sao người mà bạn tin nhất lại đối xử với bạn theo cách đó. Bạn không thấy tín hiệu — dù nó ở đó từ đầu.</div></div>
+      <div class="pain-card rv"><span class="pain-icon">🔄</span><div class="pain-title">Biết mình cần thay đổi nhưng mãi không làm được</div><div class="pain-body">Bạn tiếp nhận thông tin, học hỏi đủ cách. Bạn hiểu lý thuyết. Nhưng vào thực tế — mọi thứ vẫn như cũ. Thiếu gì đó quan trọng hơn thông tin.</div></div>
+      <div class="pain-card rv"><span class="pain-icon">😮‍💨</span><div class="pain-title">Cảm giác bị kiểm soát mà không biết bởi ai</div><div class="pain-body">Bạn luôn làm theo kỳ vọng của người khác, luôn cần sự chấp thuận, luôn lo lắng về phán xét — mà không biết tại sao mình không thể thoát ra.</div></div>
+      <div class="pain-card rv"><span class="pain-icon">🕳️</span><div class="pain-title">Sống mà không biết sống vì điều gì</div><div class="pain-body">Mọi thứ có vẻ ổn từ bên ngoài — nhưng bên trong có một khoảng trống khó tả. Bạn hoàn thành nhưng không thỏa mãn. Bận rộn nhưng không có ý nghĩa.</div></div>
+      <div class="pain-card rv"><span class="pain-icon">💢</span><div class="pain-title">Cảm xúc điều khiển bạn thay vì bạn điều khiển chúng</div><div class="pain-body">Bạn nói những điều mà sau đó hối hận. Bạn phản ứng trước khi kịp suy nghĩ. Bạn biết mình đang để cảm xúc lái — nhưng không biết làm khác.</div></div>
+      <div class="pain-card rv"><span class="pain-icon">🪤</span><div class="pain-title">Cho đi nhiều nhưng nhận lại ít — và không biết vì sao</div><div class="pain-body">Bạn tốt với mọi người. Bạn không từ chối ai. Bạn luôn có mặt khi được cần. Nhưng khi đến lượt bạn cần — có rất ít người ở đó thật sự.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ TRANSFORMATION ════ -->
+<section class="transform-section">
+  <div class="s-inner">
+    <p class="s-eye rv" style="text-align:center">Điều gì thay đổi sau khi trải nghiệm</p>
+    <h2 class="s-title rv" style="text-align:center">Trước &amp; <em>sau</em></h2>
+    <div class="sdiv rv" style="margin-left:auto;margin-right:auto;"></div>
+    <div class="transform-grid rv">
+      <div class="tf-before">
+        <div class="tf-label">Trước đây</div>
+        <div class="tf-item">Bị người khác làm cho bất ngờ liên tục mà không hiểu lý do</div>
+        <div class="tf-item">Cảm xúc bùng phát, nói xong hối hận mà không kiểm soát được</div>
+        <div class="tf-item">Không biết từ chối, sợ làm mất lòng người khác</div>
+        <div class="tf-item">Bận rộn nhưng cảm thấy trống rỗng, không biết sống vì điều gì</div>
+        <div class="tf-item">Bị kiểm soát mà không nhận ra mình đang bị thao túng</div>
+      </div>
+      <div class="tf-after">
+        <div class="tf-label">Sau khi trải nghiệm</div>
+        <div class="tf-item">Nhìn thấu động lực thật đằng sau hành vi của người khác</div>
+        <div class="tf-item">Tạo được khoảng cách giữa cảm xúc và hành động</div>
+        <div class="tf-item">Xây dựng ranh giới mà không làm mất mối quan hệ</div>
+        <div class="tf-item">Xác định được nguồn ý nghĩa sống thật sự cho bản thân</div>
+        <div class="tf-item">Hiểu cơ chế quyền lực và ảnh hưởng thật, không bị thao túng</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ NỘI DUNG ════ -->
+<section class="content-section" id="content">
+  <div class="s-inner">
+    <p class="s-eye rv">Nội dung tài liệu</p>
+    <h2 class="s-title rv">6 luận giải — mỗi phần đủ để <em>thay đổi một góc nhìn</em></h2>
+    <div class="sdiv rv"></div>
+    <div class="parts-list">
+      <div class="part-row rv"><div class="prow-num">I</div><div class="prow-body"><div class="prow-kw">Luận giải thứ nhất · Nền tảng</div><div class="prow-title">Bản Chất Con Người — Nhìn thật thay vì nhìn đẹp</div><div class="prow-desc">Tại sao người ta hành động như vậy? Động lực thật đằng sau mọi hành vi. Cách nhận ra bản chất thật của người khác sớm hơn.</div><div class="prow-tags"><span class="prow-tag">Lý thuyết hành vi</span><span class="prow-tag">6 ví dụ thực tế</span><span class="prow-tag">4 bước thực hành</span></div></div></div>
+      <div class="part-row rv"><div class="prow-num">II</div><div class="prow-body"><div class="prow-kw">Luận giải thứ hai · Tâm lý học</div><div class="prow-title">Cảm Xúc &amp; Lý Trí — Ai thực sự điều khiển bạn?</div><div class="prow-desc">Tại sao lý trí không đủ để thay đổi hành vi. Cảm xúc như dữ liệu. Cách tạo khoảng cách giữa cảm xúc và hành động.</div><div class="prow-tags"><span class="prow-tag">Khoa học thần kinh</span><span class="prow-tag">Kỹ thuật điều tiết</span><span class="prow-tag">4 bước thực hành</span></div></div></div>
+      <div class="part-row rv"><div class="prow-num">III</div><div class="prow-body"><div class="prow-kw">Luận giải thứ ba · Xã hội</div><div class="prow-title">Mối Quan Hệ Con Người — Ai thật sự ở bên bạn?</div><div class="prow-desc">Kinh tế học ngầm của mối quan hệ. Tại sao chúng ta chọn sai người. Phản bội — hiểu đúng để không bị kéo xuống.</div><div class="prow-tags"><span class="prow-tag">Attachment theory</span><span class="prow-tag">Dấu hiệu nhận biết</span><span class="prow-tag">4 bước thực hành</span></div></div></div>
+      <div class="part-row rv"><div class="prow-num">IV</div><div class="prow-body"><div class="prow-kw">Luận giải thứ tư · Xã hội học</div><div class="prow-title">Quyền Lực &amp; Ảnh Hưởng — Sức mạnh thật đến từ đâu?</div><div class="prow-desc">Ai cần ít hơn, có nhiều quyền lực hơn. Ảnh hưởng thật vs kiểm soát. Tại sao người tốt thường thua người thao túng — và cách thay đổi điều đó.</div><div class="prow-tags"><span class="prow-tag">Cơ học quyền lực</span><span class="prow-tag">Đàm phán thực tế</span><span class="prow-tag">4 bước thực hành</span></div></div></div>
+      <div class="part-row rv"><div class="prow-num">V</div><div class="prow-body"><div class="prow-kw">Luận giải thứ năm · Tự do cá nhân</div><div class="prow-title">Ranh Giới &amp; Tự Do — Điều kiện để sống thật</div><div class="prow-desc">Tại sao thiếu ranh giới là nguồn gốc của phần lớn khổ đau. Tự do thật sự là gì. Cách xây dựng ranh giới mà không làm mất mối quan hệ.</div><div class="prow-tags"><span class="prow-tag">Tâm lý ranh giới</span><span class="prow-tag">Kỹ thuật từ chối</span><span class="prow-tag">4 bước thực hành</span></div></div></div>
+      <div class="part-row rv"><div class="prow-num">VI</div><div class="prow-body"><div class="prow-kw">Luận giải thứ sáu · Triết học sống</div><div class="prow-title">Ý Nghĩa &amp; Mục Đích — Sống vì điều gì?</div><div class="prow-desc">Ý nghĩa không được tìm thấy — nó được tạo ra. Ba nguồn ý nghĩa theo Viktor Frankl. Sự khác biệt giữa hạnh phúc tức thì và ý nghĩa lâu dài.</div><div class="prow-tags"><span class="prow-tag">Logotherapy</span><span class="prow-tag">Triết học thực dụng</span><span class="prow-tag">4 bước thực hành</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ TRÍCH ĐOẠN ════ -->
+<section class="excerpt-section">
+  <div class="s-inner">
+    <p class="s-eye rv">Trải nghiệm trước khi quyết định</p>
+    <h2 class="s-title rv">Cảm nhận <em>phong cách viết</em> — trích đoạn chọn lọc</h2>
+    <div class="sdiv rv"></div>
+    <div class="excerpts-grid">
+      <div class="exc-card rv"><div class="exc-part">Luận giải I · Bản Chất Con Người</div><div class="exc-text">"Con người không thể giả mãi. Bản chất thật luôn tìm cách thoát ra — trong một khoảnh khắc giận dữ, trong cách họ đối xử với người yếu hơn họ, trong lựa chọn họ đưa ra khi không ai nhìn."</div><div class="exc-insight">Điều bạn thấy khi họ nghĩ không ai nhìn — đó mới là người thật của họ.</div></div>
+      <div class="exc-card rv"><div class="exc-part">Luận giải II · Cảm Xúc &amp; Lý Trí</div><div class="exc-text">"Người không hiểu cảm xúc của mình sẽ bị chúng kiểm soát mà tưởng rằng đang hành động theo lý trí. Người hiểu cảm xúc mới có thể chọn: đi theo chúng hay đứng trên chúng."</div><div class="exc-insight">Lý trí không điều khiển hành vi — nó chỉ biện hộ cho quyết định cảm xúc đã đưa ra từ trước.</div></div>
+      <div class="exc-card rv"><div class="exc-part">Luận giải III · Mối Quan Hệ</div><div class="exc-text">"Chúng ta không bị thu hút bởi người tốt nhất cho mình. Chúng ta bị thu hút bởi người quen thuộc nhất với mình. Và đôi khi, hai điều đó không phải một."</div><div class="exc-insight">Attachment pattern hình thành từ thuở thơ ấu sẽ điều hướng lựa chọn tình cảm của bạn nếu không được nhận ra.</div></div>
+      <div class="exc-card rv"><div class="exc-part">Luận giải IV · Quyền Lực</div><div class="exc-text">"Người hay la hét không có quyền lực. Họ đang che giấu sự mất kiểm soát. Người thật sự mạnh thì bình tĩnh — vì họ không cần chứng minh gì cả."</div><div class="exc-insight">Sức mạnh thật không ồn ào. Nó không cần khán giả để tồn tại.</div></div>
+      <div class="exc-card rv"><div class="exc-part">Luận giải V · Ranh Giới &amp; Tự Do</div><div class="exc-text">"Bạn không thể rót nước từ một chiếc bình rỗng. Ranh giới không phải ích kỷ — đó là cách bạn đảm bảo bình của mình không bao giờ cạn."</div><div class="exc-insight">Thiếu ranh giới không phải lòng tốt — đó là sự bất cẩn với bản thân dẫn đến oán giận.</div></div>
+      <div class="exc-card rv"><div class="exc-part">Luận giải VI · Ý Nghĩa &amp; Mục Đích</div><div class="exc-text">"Người hạnh phúc nhất không có cuộc đời tốt nhất. Họ có cách nhìn tốt nhất về cuộc đời họ có."</div><div class="exc-insight">Hạnh phúc là sản phẩm phụ của việc sống có ý nghĩa — không phải mục tiêu cần đuổi theo trực tiếp.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ ĐỊNH DẠNG ════ -->
+<section class="format-section">
+  <div class="s-inner">
+    <p class="s-eye rv">Bạn nhận được gì</p>
+    <h2 class="s-title rv">Tài liệu được giao <em>ngay sau thanh toán</em></h2>
+    <div class="sdiv rv"></div>
+    <div class="format-grid">
+      <div class="fmt-card rv"><span class="fmt-icon">🖥️</span><div class="fmt-name">Tài liệu số HTML</div><div class="fmt-desc">Tài liệu dạng trang web — truy cập trực tiếp trên mọi trình duyệt, không cần cài thêm phần mềm. Thiết kế đẹp, typography chuẩn, tương thích hoàn toàn trên điện thoại.</div></div>
+      <div class="fmt-card rv"><span class="fmt-icon">🎧</span><div class="fmt-name">Học liệu âm thanh MP3</div><div class="fmt-desc">Toàn bộ 6 luận giải được biên tập thành audio — nghe trong lúc di chuyển, tập thể dục hay trước khi ngủ. Giọng đọc chuyên nghiệp, rõ ràng, trầm tĩnh. Tổng hơn 3 giờ.</div></div>
+      <div class="fmt-card rv"><span class="fmt-icon">⚡</span><div class="fmt-name">Giao ngay tức thì</div><div class="fmt-desc">Link truy cập gửi về email ngay sau khi thanh toán thành công — thường trong vòng 1–3 phút. Không cần chờ đợi. Sở hữu vĩnh viễn, lưu trữ và sử dụng mãi mãi.</div></div>
+      <div class="fmt-card rv"><span class="fmt-icon">📱</span><div class="fmt-name">Mọi thiết bị, mọi nơi</div><div class="fmt-desc">Tương thích hoàn toàn với điện thoại, máy tính bảng và laptop. Tài liệu HTML mở bằng Chrome/Safari. File MP3 chạy trên mọi ứng dụng nghe nhạc.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ PRICING ════ -->
+<section class="pricing-section" id="pricing">
+  <div class="s-inner">
+    <p class="s-eye rv" style="text-align:center">Chọn gói phù hợp</p>
+    <h2 class="s-title rv" style="text-align:center">Sở hữu ngay — <em>ba lựa chọn</em></h2>
+    <div class="sdiv rv" style="margin-left:auto;margin-right:auto;"></div>
+    <div class="countdown-bar rv">
+      <span class="cd-label">Ưu đãi kết thúc sau</span>
+      <div class="cd-units">
+        <div class="cd-block"><span class="cd-num" id="ch">48</span><span class="cd-lbl2">Giờ</span></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block"><span class="cd-num" id="cm">00</span><span class="cd-lbl2">Phút</span></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block"><span class="cd-num" id="cs">00</span><span class="cd-lbl2">Giây</span></div>
+      </div>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card rv">
+        <span class="pc-badge basic">Tài liệu số</span>
+        <div class="pc-name">Bản HTML</div>
+        <div class="pc-desc">Tài liệu số chuyên nghiệp — lý thuyết, ví dụ và thực hành đầy đủ</div>
+        <div class="pc-price">299<span>k</span></div>
+        <div class="pc-unit">Thanh toán một lần · Sở hữu mãi mãi</div>
+        <ul class="pc-features">
+          <li>Tài liệu số HTML trên mọi thiết bị</li>
+          <li>6 luận giải đầy đủ — hơn 30.000 từ</li>
+          <li>30+ luận điểm cốt lõi</li>
+          <li>60+ ví dụ thực tế đời thường</li>
+          <li>24 hướng thực hành áp dụng ngay</li>
+          <li>Giao tài liệu ngay sau thanh toán</li>
+        </ul>
+        <button class="pc-cta outline" onclick="openModal('html')">Chọn bản HTML — 299k</button>
+        <div class="pc-guarantee">🔒 Thanh toán bảo mật · Hóa đơn điện tử</div>
+      </div>
+      <div class="price-card featured rv">
+        <span class="pc-badge combo">🔥 Bán chạy nhất</span>
+        <div class="pc-name">Bộ Combo</div>
+        <div class="pc-desc">HTML + MP3 — tiếp nhận khi có thời gian, nghe khi bận rộn</div>
+        <div class="pc-price">399<span>k</span></div>
+        <div class="pc-unit">Tiết kiệm 199k so với mua lẻ</div>
+        <ul class="pc-features">
+          <li>Tài liệu số HTML đầy đủ như bản lẻ</li>
+          <li>Bộ 6 file MP3 — mỗi file 1 luận giải</li>
+          <li>Giọng đọc chuyên nghiệp, trầm tĩnh</li>
+          <li>Nghe được mọi lúc mọi nơi</li>
+          <li>Tổng hơn 3 giờ nội dung audio</li>
+          <li>Sở hữu vĩnh viễn cả hai định dạng</li>
+        </ul>
+        <button class="pc-cta gold" onclick="openModal('combo')">Chọn Combo — 399k →</button>
+        <div class="pc-guarantee">🔒 Thanh toán bảo mật · Hóa đơn điện tử</div>
+      </div>
+      <div class="price-card rv">
+        <span class="pc-badge basic">Học liệu âm thanh</span>
+        <div class="pc-name">Bản MP3</div>
+        <div class="pc-desc">Bộ học liệu âm thanh — nghe trong lúc di chuyển, tập thể dục</div>
+        <div class="pc-price">299<span>k</span></div>
+        <div class="pc-unit">Thanh toán một lần · Sở hữu mãi mãi</div>
+        <ul class="pc-features">
+          <li>6 file MP3 — mỗi file 1 luận giải</li>
+          <li>Tổng hơn 3 giờ nội dung audio</li>
+          <li>Giọng đọc chuyên nghiệp, rõ ràng</li>
+          <li>Chạy trên mọi ứng dụng nghe nhạc</li>
+          <li>Lưu trữ không giới hạn</li>
+          <li>Giao file ngay sau thanh toán</li>
+        </ul>
+        <button class="pc-cta outline" onclick="openModal('mp3')">Chọn bản MP3 — 299k</button>
+        <div class="pc-guarantee">🔒 Thanh toán bảo mật · Hóa đơn điện tử</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ REVIEWS ════ -->
+<section class="reviews-section">
+  <div class="s-inner">
+    <p class="s-eye rv">Cảm nhận thực tế</p>
+    <h2 class="s-title rv">Họ nói gì sau khi <em>trải nghiệm?</em></h2>
+    <div class="sdiv rv"></div>
+    <div class="reviews-grid">
+      <div class="rev-card rv"><div class="stars">★★★★★</div><div class="rev-text">"Phần về mối quan hệ là thứ tôi ước mình được tiếp nhận từ 5 năm trước. Tôi đã hiểu tại sao mình cứ chọn sai người — không phải vì xui, mà vì mô hình tôi mang theo từ nhỏ."</div><div class="rev-author"><div class="rev-av">TH</div><div><div class="rev-name">Thanh Hà</div><div class="rev-role">Marketing Manager, 31 tuổi</div></div></div></div>
+      <div class="rev-card rv"><div class="stars">★★★★★</div><div class="rev-text">"Phần về quyền lực thực sự mở ra một cách nhìn mới. Tôi nhận ra mình hay để người khác kiểm soát mình vì cần được yêu thích — và giờ tôi biết cách thay đổi điều đó."</div><div class="rev-author"><div class="rev-av">MK</div><div><div class="rev-name">Minh Khoa</div><div class="rev-role">Freelancer, 27 tuổi</div></div></div></div>
+      <div class="rev-card rv"><div class="stars">★★★★★</div><div class="rev-text">"Bộ MP3 là thứ tôi nghe đi nghe lại trong lúc lái xe. Mỗi lần nghe lại thấy hiểu sâu hơn. Phần về ý nghĩa sống — tôi đã phải dừng xe để ngồi suy nghĩ."</div><div class="rev-author"><div class="rev-av">PL</div><div><div class="rev-name">Phương Linh</div><div class="rev-role">Giáo viên, 34 tuổi</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FAQ ════ -->
+<section class="faq-section">
+  <div class="s-inner">
+    <p class="s-eye rv" style="text-align:center">Câu hỏi thường gặp</p>
+    <h2 class="s-title rv" style="text-align:center">Bạn đang <em>thắc mắc điều gì?</em></h2>
+    <div class="sdiv rv" style="margin:16px auto 32px;"></div>
+    <div class="faq-list rv">
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Sau khi thanh toán, tôi nhận tài liệu như thế nào?<span class="faq-icon">+</span></button><div class="faq-a">Hệ thống tự động gửi link nhận tài liệu về email bạn điền khi đặt hàng, thường trong vòng 1–3 phút. Nếu không thấy sau 15 phút, kiểm tra hộp thư Spam hoặc liên hệ admin@hanadola.com để được hỗ trợ ngay.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Tài liệu HTML mở bằng cách nào?<span class="faq-icon">+</span></button><div class="faq-a">Tài liệu HTML mở trực tiếp bằng bất kỳ trình duyệt nào (Chrome, Safari, Firefox, Edge). Tải file về → click đúp → trình duyệt sẽ mở. Không cần internet sau khi đã tải về. Hoạt động trên điện thoại, máy tính bảng và máy tính.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">File MP3 có thể nghe bằng ứng dụng nào?<span class="faq-icon">+</span></button><div class="faq-a">Mọi ứng dụng nghe nhạc đều chạy được file MP3 — Apple Music, VLC, điện thoại Android mặc định, hay đơn giản là mở bằng Files trên iPhone/Android. File được tối ưu để nghe rõ ràng ngay cả ở tốc độ 1.5x.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Có thể mua lẻ từng luận giải không?<span class="faq-icon">+</span></button><div class="faq-a">Hiện tại tài liệu được bán theo bộ đầy đủ 6 luận giải — vì các phần có sự liên kết và bổ trợ lẫn nhau. Giá hiện tại đã được thiết kế để cung cấp giá trị tối đa cho toàn bộ bộ tài liệu.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Tài liệu này có phù hợp với tôi không?<span class="faq-icon">+</span></button><div class="faq-a">Bộ Luận Giải Nhân Sinh phù hợp với bất kỳ ai từ 20 tuổi trở lên, đang muốn hiểu rõ hơn về bản thân và người xung quanh. Không cần nền tảng triết học hay tâm lý học. Ngôn ngữ gần gũi, có ví dụ thực tế và hướng dẫn áp dụng cụ thể.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Có hóa đơn điện tử không?<span class="faq-icon">+</span></button><div class="faq-a">Có. Hóa đơn điện tử hợp lệ được phát hành tự động qua hệ thống SePay và gửi kèm trong email ngay sau thanh toán. Hóa đơn đầy đủ thông tin công ty, MST, hợp lệ cho mục đích kế toán.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Chính sách hỗ trợ như thế nào?<span class="faq-icon">+</span></button><div class="faq-a">Nếu tài liệu bị lỗi hoặc không nhận được email, chúng tôi cam kết hỗ trợ đến khi bạn nhận và truy cập được tài liệu thành công. Liên hệ: admin@hanadola.com hoặc 0935 251 866. Phản hồi trong vòng 24 giờ làm việc.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FINAL CTA ════ -->
+<section class="final-cta">
+  <p class="fc-quote rv">
+    "Hiểu người khác là kỹ năng. Hiểu chính mình là <strong>trí tuệ</strong>.<br>
+    Và hành động từ sự hiểu đó — đó mới là <strong>tự do thật sự.</strong>"
+  </p>
+  <div class="fc-cta-wrap rv">
+    <button class="btn-gold" onclick="openModal('combo')" style="font-size:14px;padding:18px 48px;letter-spacing:2px;">
+      Sở hữu Bộ Luận Giải Nhân Sinh →
+    </button>
+    <p style="font-size:11px;color:var(--muted2);">Giao tài liệu ngay · Sở hữu vĩnh viễn · Hóa đơn điện tử tự động</p>
+  </div>
+</section>
+
+<!-- ════ POLICIES ════ -->
+<section class="policy-section">
+  <div class="policy-inner">
+    <div class="policy-tabs">
+      <button class="pol-tab active" onclick="showPol('hoan-tra',this)">Chính sách hỗ trợ</button>
+      <button class="pol-tab" onclick="showPol('bao-mat',this)">Chính sách bảo mật</button>
+    </div>
+    <div class="pol-content active" id="pol-hoan-tra">
+      <div class="pol-title">Chính sách hỗ trợ và xử lý sự cố</div>
+      <div class="pol-date">Cập nhật: Tháng 01/2026</div>
+      <div class="pol-body">
+        <div class="pol-item"><div class="pol-item-title">1. Đặc thù sản phẩm số</div><div class="pol-item-body">Bộ Luận Giải Nhân Sinh là <strong style="color:var(--gold2)">tài liệu số (file HTML và/hoặc MP3)</strong> — được giao ngay sau thanh toán. Do tính chất của hàng hóa kỹ thuật số, chúng tôi không áp dụng hoàn tiền sau khi tài liệu đã được giao thành công.</div></div>
+        <div class="pol-item"><div class="pol-item-title">2. Các trường hợp được hỗ trợ</div><div class="pol-item-body">Chúng tôi cam kết hỗ trợ đầy đủ trong các trường hợp:</div><div class="pol-steps"><div class="pol-step"><span class="ps-num">✓</span><span class="ps-text">Tài liệu bị lỗi hoặc không truy cập được → Giao lại trong 24 giờ</span></div><div class="pol-step"><span class="ps-num">✓</span><span class="ps-text">Thanh toán thành công nhưng không nhận được email sau 30 phút → Giao lại ngay khi liên hệ</span></div><div class="pol-step"><span class="ps-num">✓</span><span class="ps-text">Thanh toán trùng lặp (charge 2 lần) → Hoàn lại 100% khoản thừa</span></div></div></div>
+        <div class="pol-item"><div class="pol-item-title">3. Quy trình liên hệ hỗ trợ</div><div class="pol-steps"><div class="pol-step"><span class="ps-num">B1</span><span class="ps-text">Gửi email đến <strong style="color:var(--gold2)">admin@hanadola.com</strong> hoặc nhắn tin Fanpage Góc Tĩnh Lặng</span></div><div class="pol-step"><span class="ps-num">B2</span><span class="ps-text">Mô tả vấn đề và đính kèm bằng chứng thanh toán</span></div><div class="pol-step"><span class="ps-num">B3</span><span class="ps-text">Chúng tôi phản hồi trong <strong style="color:var(--gold2)">24–48 giờ làm việc</strong></span></div></div></div>
+      </div>
+    </div>
+    <div class="pol-content" id="pol-bao-mat">
+      <div class="pol-title">Chính sách bảo mật thông tin khách hàng</div>
+      <div class="pol-date">Cập nhật: Tháng 01/2026</div>
+      <div class="pol-body">
+        <div class="pol-item"><div class="pol-item-title">1. Thông tin chúng tôi thu thập</div><div class="pol-item-body">Khi mua tài liệu, chúng tôi thu thập: họ tên, email (để giao tài liệu), số điện thoại (nếu cần xác nhận). Thanh toán xử lý qua SePay — chúng tôi không lưu thông tin thẻ.</div></div>
+        <div class="pol-item"><div class="pol-item-title">2. Cam kết bảo mật</div><div class="pol-steps"><div class="pol-step"><span class="ps-num">✓</span><span class="ps-text">Thông tin <strong style="color:var(--gold2)">không được bán, trao đổi hoặc chia sẻ</strong> với bên thứ ba</span></div><div class="pol-step"><span class="ps-num">✓</span><span class="ps-text">Dữ liệu lưu trữ trên hệ thống bảo mật tiêu chuẩn SSL</span></div><div class="pol-step"><span class="ps-num">✓</span><span class="ps-text">Bạn có quyền yêu cầu xóa thông tin bất kỳ lúc nào — liên hệ admin@hanadola.com</span></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ COMPANY ════ -->
+<section class="company-section">
+  <div class="company-inner">
+    <div class="co-title">Thông tin doanh nghiệp</div>
+    <div class="co-grid">
+      <div class="co-item"><div class="co-lbl">Tên công ty</div><div class="co-val">Công ty TNHH Hanadola Media &amp; Technology</div></div>
+      <div class="co-item"><div class="co-lbl">Mã số thuế</div><div class="co-val">0319352856</div></div>
+      <div class="co-item"><div class="co-lbl">Địa chỉ trụ sở</div><div class="co-val">P903, Tầng 9, Diamond Plaza, 34 Lê Duẩn, Phường Bến Nghé, Q.1, TP.HCM</div></div>
+      <div class="co-item"><div class="co-lbl">Liên hệ</div><div class="co-val">📞 0935 251 866<br>✉ admin@hanadola.com</div></div>
+      <div class="co-item"><div class="co-lbl">Fanpage</div><div class="co-val">facebook.com/Goctinhlang6868<br>facebook.com/hanadola.official</div></div>
+      <div class="co-item"><div class="co-lbl">Đăng ký kinh doanh</div><div class="co-val">Đã đăng ký theo quy định pháp luật Việt Nam. Hoạt động TMĐT theo Nghị định 52/2013/NĐ-CP</div></div>
+    </div>
+    <div class="co-legal">© 2026 Công ty TNHH Hanadola Media &amp; Technology. Bảo lưu mọi quyền. Tài liệu số được bảo vệ bản quyền — mọi hình thức sao chép, phân phối lại khi chưa được phép đều vi phạm bản quyền và pháp luật Việt Nam.</div>
+  </div>
+</section>
+
+<script>
+/* ── Package config ── */
+const PKGS = {
+  html:  { label: 'Bản HTML — Tài liệu số', name: 'Tài liệu số HTML', price: 299000, priceLabel: '299k' },
+  mp3:   { label: 'Bản MP3 — Học liệu âm thanh', name: 'Học liệu âm thanh MP3', price: 299000, priceLabel: '299k' },
+  combo: { label: 'Bộ Combo HTML + MP3', name: 'Combo HTML + MP3', price: 399000, priceLabel: '399k' },
+};
+let currentPkg = 'combo';
+let currentOrderCode = '';
+let pollTimer = null;
+
+function openModal(pkg) {
+  currentPkg = pkg || 'combo';
+  const p = PKGS[currentPkg];
+  document.getElementById('modal-pkg-label').textContent = p.label;
+  document.getElementById('modal-pkg-name').textContent = p.name;
+  document.getElementById('modal-price').innerHTML = p.priceLabel.replace('k','') + '<span style="font-size:16px;font-weight:300;color:var(--muted)">k</span>';
+  showStep(1);
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+  if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+}
+document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+function showStep(n) {
+  document.getElementById('step1').style.display = n === 1 ? 'block' : 'none';
+  document.getElementById('step2').style.display = n === 2 ? 'block' : 'none';
+  document.getElementById('step3').style.display = n === 3 ? 'block' : 'none';
+  [1,2,3].forEach(i => {
+    document.getElementById('ms'+i).classList.toggle('active', i <= n);
+  });
+}
+
+async function submitOrder() {
+  const name  = document.getElementById('m-name').value.trim();
+  const email = document.getElementById('m-email').value.trim();
+  const phone = document.getElementById('m-phone').value.trim();
+  if (!name || !email || !phone) { alert('Vui lòng điền đầy đủ thông tin!'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Email không hợp lệ!'); return; }
+  const btn = document.getElementById('m-btn');
+  btn.disabled = true; btn.textContent = 'Đang xử lý...';
+  try {
+    const r = await fetch('/api/create-order', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, phone, pkg: currentPkg }),
+    });
+    const d = await r.json();
+    if (!d.success) { alert(d.error || 'Có lỗi xảy ra!'); btn.disabled=false; btn.textContent='Tiếp tục — Thanh toán →'; return; }
+    currentOrderCode = d.orderCode;
+    const p = PKGS[currentPkg];
+    document.getElementById('s2-ordercode').textContent = d.orderCode;
+    document.getElementById('s2-account').textContent = d.bankAccount;
+    document.getElementById('s2-amount').textContent = p.price.toLocaleString('vi-VN') + ' ₫';
+    document.getElementById('s2-desc').textContent = d.description;
+    document.getElementById('s2-qr-img').src = d.qrUrl;
+    document.getElementById('s3-email').textContent = email;
+    showStep(2);
+    startPolling(d.orderCode);
+  } catch(e) {
+    alert('Lỗi kết nối. Vui lòng thử lại!');
+    btn.disabled = false; btn.textContent = 'Tiếp tục — Thanh toán →';
+  }
+}
+
+function startPolling(orderCode) {
+  if (pollTimer) clearInterval(pollTimer);
+  pollTimer = setInterval(async () => {
+    try {
+      const r = await fetch('/api/check-payment?orderCode=' + orderCode);
+      const d = await r.json();
+      if (d.status === 'paid') {
+        clearInterval(pollTimer); pollTimer = null;
+        showStep(3);
+      }
+    } catch(e) {}
+  }, 3000);
+}
+
+/* ── Countdown ── */
+const KEY = 'lgns_cd';
+let end = localStorage.getItem(KEY);
+if (!end || Date.now() > +end) { end = Date.now() + 48*3600000; localStorage.setItem(KEY, end); }
+else end = +end;
+function pad(n) { return String(n).padStart(2, '0'); }
+function tick() {
+  const d = Math.max(0, end - Date.now());
+  const h = Math.floor(d/3600000), m = Math.floor(d%3600000/60000), s = Math.floor(d%60000/1000);
+  document.getElementById('ch').textContent = pad(h);
+  document.getElementById('cm').textContent = pad(m);
+  document.getElementById('cs').textContent = pad(s);
+}
+tick(); setInterval(tick, 1000);
+
+/* ── Sticky nav ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('snav').classList.toggle('show', scrollY > 600);
+}, { passive: true });
+
+/* ── Scroll reveal ── */
+const ro = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+}, { threshold: .08 });
+document.querySelectorAll('.rv').forEach((el, i) => {
+  el.style.transitionDelay = (i % 6 * 0.07) + 's'; ro.observe(el);
+});
+
+/* ── FAQ ── */
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const was = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!was) item.classList.add('open');
+}
+
+/* ── Policy tabs ── */
+function showPol(id, btn) {
+  document.querySelectorAll('.pol-content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.pol-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('pol-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
