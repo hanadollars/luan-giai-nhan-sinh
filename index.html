@@ -648,6 +648,186 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
   </div>
 </section>
 
+  
+<!-- ════ NGHE THỬ AUDIO ════ -->
+<section id="audio-preview" style="padding:80px 40px;background:#0C0C12;border-top:1px solid rgba(201,168,76,0.12)">
+  <div class="s-inner" style="max-width:780px">
+    <p class="s-eye rv" style="color:rgba(201,168,76,0.7)">Nghe trước — Quyết định sau</p>
+    <h2 class="s-title rv">Cảm nhận <em>giọng đọc & nội dung</em><br>trước khi sở hữu</h2>
+    <div class="sdiv rv"></div>
+    <p class="rv" style="color:rgba(255,255,255,0.55);font-size:15px;text-align:center;margin-bottom:36px;line-height:1.8">
+      Đoạn trích 6 phút từ luận giải <strong style="color:#E0BB6A">Tý — Sức mạnh ẩn trong bóng tối</strong>.<br>
+      Nghe thử miễn phí — không cần đăng ký.
+    </p>
+
+    <!-- Player card -->
+    <div class="rv" style="background:linear-gradient(145deg,#141420,#0e0e1a);border:1px solid rgba(201,168,76,0.25);border-radius:16px;padding:32px 36px;box-shadow:0 20px 60px rgba(0,0,0,0.5)">
+
+      <!-- Track info -->
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
+        <div style="width:52px;height:52px;background:linear-gradient(135deg,#C9A84C,#8a6a20);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px">🎙️</div>
+        <div>
+          <div style="color:#E0BB6A;font-size:15px;font-weight:700;letter-spacing:.3px">Luận Giải Nhân Sinh — Trích đoạn</div>
+          <div style="color:rgba(255,255,255,0.4);font-size:12px;margin-top:3px">Tý · Sức mạnh ẩn trong bóng tối · ~6 phút</div>
+        </div>
+      </div>
+
+      <!-- Waveform + play button -->
+      <div style="display:flex;align-items:center;gap:20px;margin-bottom:20px">
+        <!-- Play/Pause button -->
+        <button id="lgns-play-btn" onclick="lgnsToggleAudio()" style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#C9A84C,#a07830);border:none;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(201,168,76,0.4);transition:transform .15s,box-shadow .15s" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+          <span id="lgns-play-icon" style="color:#fff;font-size:22px;margin-left:3px">▶</span>
+        </button>
+
+        <!-- Waveform bars -->
+        <div id="lgns-waveform" style="display:flex;align-items:center;gap:3px;flex:1;height:56px;overflow:hidden;cursor:pointer" onclick="lgnsSeekFromWave(event)">
+          <style>
+          @keyframes lgns-wave {
+            0%,100%{height:6px} 50%{height:var(--h)}
+          }
+          .lgns-bar{background:rgba(201,168,76,0.3);border-radius:3px;width:5px;transition:background .3s;animation:none;flex-shrink:0}
+          .lgns-bar.playing{background:#C9A84C;animation:lgns-wave 1.1s ease-in-out infinite}
+          .lgns-bar.played{background:rgba(201,168,76,0.7)}
+          </style>
+          <!-- 36 bars with random heights -->
+          <div class="lgns-bar" style="--h:28px;height:14px"></div>
+          <div class="lgns-bar" style="--h:44px;height:22px"></div>
+          <div class="lgns-bar" style="--h:36px;height:18px"></div>
+          <div class="lgns-bar" style="--h:52px;height:26px"></div>
+          <div class="lgns-bar" style="--h:32px;height:16px"></div>
+          <div class="lgns-bar" style="--h:46px;height:23px"></div>
+          <div class="lgns-bar" style="--h:38px;height:19px"></div>
+          <div class="lgns-bar" style="--h:56px;height:28px"></div>
+          <div class="lgns-bar" style="--h:42px;height:21px"></div>
+          <div class="lgns-bar" style="--h:30px;height:15px"></div>
+          <div class="lgns-bar" style="--h:50px;height:25px"></div>
+          <div class="lgns-bar" style="--h:40px;height:20px"></div>
+          <div class="lgns-bar" style="--h:60px;height:30px"></div>
+          <div class="lgns-bar" style="--h:34px;height:17px"></div>
+          <div class="lgns-bar" style="--h:48px;height:24px"></div>
+          <div class="lgns-bar" style="--h:44px;height:22px"></div>
+          <div class="lgns-bar" style="--h:56px;height:28px"></div>
+          <div class="lgns-bar" style="--h:38px;height:19px"></div>
+          <div class="lgns-bar" style="--h:42px;height:21px"></div>
+          <div class="lgns-bar" style="--h:64px;height:32px"></div>
+          <div class="lgns-bar" style="--h:36px;height:18px"></div>
+          <div class="lgns-bar" style="--h:52px;height:26px"></div>
+          <div class="lgns-bar" style="--h:46px;height:23px"></div>
+          <div class="lgns-bar" style="--h:28px;height:14px"></div>
+          <div class="lgns-bar" style="--h:58px;height:29px"></div>
+          <div class="lgns-bar" style="--h:40px;height:20px"></div>
+          <div class="lgns-bar" style="--h:50px;height:25px"></div>
+          <div class="lgns-bar" style="--h:34px;height:17px"></div>
+          <div class="lgns-bar" style="--h:44px;height:22px"></div>
+          <div class="lgns-bar" style="--h:56px;height:28px"></div>
+          <div class="lgns-bar" style="--h:32px;height:16px"></div>
+          <div class="lgns-bar" style="--h:48px;height:24px"></div>
+          <div class="lgns-bar" style="--h:42px;height:21px"></div>
+          <div class="lgns-bar" style="--h:36px;height:18px"></div>
+          <div class="lgns-bar" style="--h:26px;height:13px"></div>
+          <div class="lgns-bar" style="--h:22px;height:11px"></div>
+        </div>
+      </div>
+
+      <!-- Progress bar -->
+      <div style="position:relative;margin-bottom:10px;cursor:pointer" onclick="lgnsSeek(event)">
+        <div style="height:4px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden">
+          <div id="lgns-progress" style="height:100%;width:0%;background:linear-gradient(90deg,#C9A84C,#E0BB6A);border-radius:4px;transition:width .5s linear"></div>
+        </div>
+      </div>
+
+      <!-- Time -->
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.3);margin-bottom:20px">
+        <span id="lgns-current">0:00</span>
+        <span id="lgns-duration">--:--</span>
+      </div>
+
+      <!-- Hook text -->
+      <div style="background:rgba(201,168,76,0.06);border-left:3px solid #C9A84C;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:24px">
+        <p style="color:rgba(255,255,255,0.65);font-size:13px;line-height:1.8;margin:0;font-style:italic">
+          "Đây chỉ là 6 phút trong tổng hơn 3 giờ nội dung. Toàn bộ 6 luận giải đầy đủ — cùng bản audio MP3 — có trong gói Combo."
+        </p>
+      </div>
+
+      <!-- CTA -->
+      <a href="#pricing" style="display:block;background:linear-gradient(135deg,#C9A84C,#a07830);color:#fff;text-align:center;padding:16px;border-radius:8px;font-size:15px;font-weight:700;text-decoration:none;letter-spacing:.5px;box-shadow:0 4px 20px rgba(201,168,76,0.3)">
+        🎧 Sở Hữu Trọn Bộ Audio — Xem Gói Ngay
+      </a>
+    </div>
+
+    <!-- Hidden audio element -->
+    <audio id="lgns-audio" preload="metadata" src="./sample.mp3"></audio>
+
+    <script>
+    (function(){
+      const audio = document.getElementById('lgns-audio');
+      const playBtn = document.getElementById('lgns-play-btn');
+      const playIcon = document.getElementById('lgns-play-icon');
+      const progress = document.getElementById('lgns-progress');
+      const currentEl = document.getElementById('lgns-current');
+      const durationEl = document.getElementById('lgns-duration');
+      const bars = document.querySelectorAll('#lgns-waveform .lgns-bar');
+
+      function fmt(s){
+        if(isNaN(s))return'--:--';
+        const m=Math.floor(s/60),sec=Math.floor(s%60);
+        return m+':'+(sec<10?'0':'')+sec;
+      }
+
+      audio.addEventListener('loadedmetadata',function(){
+        durationEl.textContent = fmt(audio.duration);
+      });
+
+      audio.addEventListener('timeupdate',function(){
+        const pct = audio.duration ? (audio.currentTime/audio.duration)*100 : 0;
+        progress.style.width = pct+'%';
+        currentEl.textContent = fmt(audio.currentTime);
+        // Color bars by progress
+        bars.forEach(function(b,i){
+          const barPct = (i/bars.length)*100;
+          b.classList.toggle('played', barPct < pct && !audio.paused===false);
+        });
+      });
+
+      audio.addEventListener('ended',function(){
+        playIcon.textContent='▶';
+        playIcon.style.marginLeft='3px';
+        bars.forEach(function(b){b.classList.remove('playing');});
+      });
+
+      window.lgnsToggleAudio = function(){
+        if(audio.paused){
+          audio.play();
+          playIcon.textContent='⏸';
+          playIcon.style.marginLeft='0';
+          bars.forEach(function(b,i){
+            b.classList.add('playing');
+            b.style.animationDelay=(i*0.04)+'s';
+          });
+        } else {
+          audio.pause();
+          playIcon.textContent='▶';
+          playIcon.style.marginLeft='3px';
+          bars.forEach(function(b){b.classList.remove('playing');});
+        }
+      };
+
+      window.lgnsSeek = function(e){
+        const rect = e.currentTarget.getBoundingClientRect();
+        const pct = (e.clientX - rect.left)/rect.width;
+        if(audio.duration) audio.currentTime = pct * audio.duration;
+      };
+
+      window.lgnsSeekFromWave = function(e){
+        const rect = e.currentTarget.getBoundingClientRect();
+        const pct = (e.clientX - rect.left)/rect.width;
+        if(audio.duration) audio.currentTime = pct * audio.duration;
+      };
+    })();
+    </script>
+
+  </div>
+</section>
 <!-- ════ ĐỊNH DẠNG ════ -->
 <section class="format-section">
   <div class="s-inner">
