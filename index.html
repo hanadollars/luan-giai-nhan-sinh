@@ -444,6 +444,12 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
 @media(max-width:500px){
   .co-grid{grid-template-columns:1fr}
 }
+@media(max-width:900px){
+  body{overflow-x:hidden}
+  .hero-price-teaser{flex-wrap:wrap}
+  .hero-ctas{flex-direction:column!important;width:100%}
+  .btn-gold,.btn-ghost-light{width:100%!important;box-sizing:border-box!important;text-align:center!important;display:block!important}
+}
 </style>
 </head>
 <body style="overflow-x:hidden">
