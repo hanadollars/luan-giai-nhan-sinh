@@ -427,7 +427,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   .snav{padding:11px 20px}
-  .hero{padding:80px 20px 60px}.hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero{padding:80px 20px 60px}.hero-inner{grid-template-columns:1fr!important;gap:40px}
   .hero-right{order:-1}.book-3d{max-width:320px;margin:0 auto}
   .why-section,.transform-section,.content-section,.excerpt-section,
   .format-section,.pricing-section,.reviews-section,.faq-section,
@@ -446,7 +446,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
 }
 </style>
 </head>
-<body>
+<body style="overflow-x:hidden">
 
 <!-- MODAL THANH TOÁN -->
 <div class="modal-overlay" id="modal">
