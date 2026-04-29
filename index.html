@@ -437,8 +437,11 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
   .trust-bar{padding:16px 20px}.trust-inner{gap:20px}
   .modal-box{padding:28px 22px}
 }
+@media(max-width:768px){
+  .hero-ctas{flex-direction:column}
+  .btn-gold,.btn-ghost-light{text-align:center;width:100%;box-sizing:border-box;white-space:nowrap}
+}
 @media(max-width:500px){
-  .hero-ctas{flex-direction:column}.btn-gold,.btn-ghost-light{text-align:center}
   .co-grid{grid-template-columns:1fr}
 }
 </style>
