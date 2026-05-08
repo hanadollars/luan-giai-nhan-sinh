@@ -2,9 +2,9 @@
 // CommonJS – fetch thuần, không npm packages
 
 const PACKAGES = {
-  html:  { name: 'Bộ Luận Giải Nhân Sinh — Tài liệu số HTML', price: 299000 },
-  mp3:   { name: 'Bộ Luận Giải Nhân Sinh — Học liệu âm thanh MP3', price: 299000 },
-  combo: { name: 'Bộ Luận Giải Nhân Sinh — Combo HTML + MP3', price: 399000 },
+  html:  { name: 'Bộ Luận Giải Nhân Sinh — Tài liệu số HTML', price: 79000 },
+  mp3:   { name: 'Bộ Luận Giải Nhân Sinh — Học liệu âm thanh MP3', price: 79000 },
+  combo: { name: 'Bộ Luận Giải Nhân Sinh — Combo HTML + MP3', price: 99000 },
 };
 
 function generateOrderCode() {
