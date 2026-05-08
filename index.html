@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bộ Luận Giải Nhân Sinh </title>
+<title>Bộ Luận Giải Nhân Sinh — Góc Tĩnh Lặng | Hanadola</title>
 <meta name="description" content="6 luận giải sâu sắc về bản chất con người, cảm xúc, mối quan hệ, quyền lực, tự do và ý nghĩa sống. Nhận tài liệu ngay sau thanh toán.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -527,6 +527,41 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
 @media(max-width:500px){
   .co-grid{grid-template-columns:1fr}
 }
+
+/* ── ANNOUNCEMENT BAR ── */
+.announce-bar{background:linear-gradient(90deg,#5c0c0c 0%,#8B2020 50%,#5c0c0c 100%);
+  color:rgba(245,240,232,.93);padding:10px 20px;
+  display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+  border-bottom:1px solid rgba(201,168,76,.28);font-size:12.5px;font-weight:600;letter-spacing:.3px;}
+.ab-cd{display:flex;align-items:center;gap:4px;}
+.ab-num{background:rgba(0,0,0,.28);border:1px solid rgba(201,168,76,.38);border-radius:4px;
+  padding:2px 8px;font-family:var(--serif);font-size:15px;font-weight:700;color:#fff;
+  min-width:28px;text-align:center;display:inline-block;}
+.ab-sep{color:rgba(201,168,76,.9);font-weight:700;margin:0 2px}
+.ab-unit{font-size:9.5px;opacity:.6;letter-spacing:.5px;text-transform:uppercase;margin-left:1px}
+
+/* ── HERO COUNTDOWN ── */
+.hero-cd{display:flex;align-items:center;gap:14px;margin-bottom:30px;
+  animation:fadeUp .8s ease .27s both;flex-wrap:wrap;}
+.hero-cd-lbl{font-size:11px;color:var(--muted);letter-spacing:.4px;white-space:nowrap;}
+.hero-cd-units{display:flex;align-items:stretch;gap:5px;}
+.hcd-box{display:flex;flex-direction:column;align-items:center;
+  background:rgba(120,18,18,.22);border:1px solid rgba(139,32,32,.42);
+  border-radius:5px;padding:5px 11px;min-width:46px;}
+.hcd-n{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--paper);line-height:1;display:block;}
+.hcd-l{font-size:7.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted2);margin-top:2px;display:block;}
+.hcd-sep{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--red);align-self:center;margin:0 1px}
+
+/* ── SALE PRICE LABELS ── */
+.pc-sale-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.pc-old{font-size:15px;color:var(--muted2);text-decoration:line-through;font-family:var(--serif);}
+.pc-disc{background:rgba(139,32,32,.22);border:1px solid rgba(139,32,32,.4);
+  color:#ff8888;font-size:10px;font-weight:700;letter-spacing:1px;
+  padding:3px 9px;border-radius:20px;text-transform:uppercase;white-space:nowrap;}
+.hpt-old{font-size:15px;color:rgba(245,240,232,.32);text-decoration:line-through;
+  margin-left:6px;font-weight:300;letter-spacing:0;vertical-align:middle;}
+@keyframes pulse-num{0%,100%{opacity:1}50%{opacity:.7}}
+.hcd-n{animation:pulse-num 2s ease-in-out infinite}
 </style>
 </head>
 <body>
@@ -591,6 +626,19 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
   </div>
 </div>
 
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce-bar" id="announce-bar">
+  <span>🔥 Flash Sale 48H — Giá tăng sau</span>
+  <div class="ab-cd">
+    <span class="ab-num" id="ach">48</span><span class="ab-unit">g</span>
+    <span class="ab-sep">:</span>
+    <span class="ab-num" id="acm">00</span><span class="ab-unit">p</span>
+    <span class="ab-sep">:</span>
+    <span class="ab-num" id="acs">00</span><span class="ab-unit">s</span>
+  </div>
+  <span style="opacity:.72">· Mua Combo tiết kiệm thêm 159k</span>
+</div>
+
 <!-- STICKY NAV -->
 <div class="snav" id="snav">
   <span class="snav-title">Bộ Luận Giải Nhân Sinh</span>
@@ -606,10 +654,24 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
       <p class="hero-sub">Trung bình một người mất 7–10 năm để học những bài học đau đớn về con người — bị lợi dụng, bị phản bội, không hiểu chính mình. 6 luận giải này rút ngắn 10 năm đó lại. Câu hỏi duy nhất là: bạn muốn hiểu trước hay sau khi đã trả giá?</p>
       <div class="hero-price-teaser">
         <div>
-          <div class="hpt-from">Chỉ từ</div>
+          <div class="hpt-from">Giá gốc <span class="hpt-old">199k</span> → Chỉ còn</div>
           <div class="hpt-price">79<span class="hpt-vnd">k</span></div>
         </div>
-        <div class="hpt-badge">🔥 Ưu đãi có hạn</div>
+        <div>
+          <div class="hpt-badge">🔥 Flash Sale 48H</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:5px;letter-spacing:.5px">Tiết kiệm 120k · Combo chỉ 99k</div>
+        </div>
+      </div>
+      <!-- HERO COUNTDOWN -->
+      <div class="hero-cd">
+        <span class="hero-cd-lbl">⏰ Ưu đãi kết thúc sau</span>
+        <div class="hero-cd-units">
+          <div class="hcd-box"><span class="hcd-n" id="hch">48</span><span class="hcd-l">Giờ</span></div>
+          <span class="hcd-sep">:</span>
+          <div class="hcd-box"><span class="hcd-n" id="hcm">00</span><span class="hcd-l">Phút</span></div>
+          <span class="hcd-sep">:</span>
+          <div class="hcd-box"><span class="hcd-n" id="hcs">00</span><span class="hcd-l">Giây</span></div>
+        </div>
       </div>
       <div class="hero-ctas">
         <button class="btn-gold" onclick="openModal('combo')">Sở hữu ngay — Xem giá →</button>
@@ -623,7 +685,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
           <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#8a6a20,#C9A84C);border:2px solid #0C0C12;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:700;margin-left:-8px">M</div>
         </div>
         <div>
-          <div style="font-size:13px;color:rgba(245,240,232,0.85);font-weight:600"><span style="color:#C9A84C;font-weight:700">549 người</span> đã sở hữu bộ tài liệu này</div>
+          <div style="font-size:13px;color:rgba(245,240,232,0.85);font-weight:600"><span style="color:#C9A84C;font-weight:700">127 người</span> đã sở hữu bộ tài liệu này</div>
           <div style="font-size:11px;color:rgba(245,240,232,0.4);margin-top:2px">⭐⭐⭐⭐⭐ &nbsp;Đánh giá trung bình 4.9/5</div>
         </div>
       </div>
@@ -646,7 +708,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
               <div class="bk-corner br"></div>
             </div>
             <div class="bk-cover-inner">
-              <div class="bkc-brand">Hiểu người - Hiểu ta</div>
+              <div class="bkc-brand">Góc Tĩnh Lặng · Hanadola</div>
               <div class="bkc-orn"><span></span><i>◈</i><span></span></div>
               <div class="bkc-compass">
                 <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -826,7 +888,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
     <div style="text-align:center;margin-bottom:28px">
       <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);border-radius:50px;padding:10px 20px">
         <span style="font-size:18px">🏆</span>
-        <span style="color:rgba(245,240,232,0.8);font-size:13px"><span style="color:#C9A84C;font-weight:700">549 người</span> đã tin tưởng &amp; sở hữu · Đánh giá <span style="color:#C9A84C;font-weight:700">4.9★</span></span>
+        <span style="color:rgba(245,240,232,0.8);font-size:13px"><span style="color:#C9A84C;font-weight:700">127 người</span> đã tin tưởng &amp; sở hữu · Đánh giá <span style="color:#C9A84C;font-weight:700">4.9★</span></span>
       </div>
     </div>
     <div class="pricing-grid">
@@ -834,6 +896,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
         <span class="pc-badge basic">Tài liệu số</span>
         <div class="pc-name">Bản HTML</div>
         <div class="pc-desc">Tài liệu số chuyên nghiệp — lý thuyết, ví dụ và thực hành đầy đủ</div>
+        <div class="pc-sale-row"><span class="pc-old">199k</span><span class="pc-disc">-60%</span></div>
         <div class="pc-price">79<span>k</span></div>
         <div class="pc-unit">Thanh toán một lần · Sở hữu mãi mãi</div>
         <ul class="pc-features">
@@ -851,6 +914,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
         <span class="pc-badge combo">🔥 Bán chạy nhất</span>
         <div class="pc-name">Bộ Combo</div>
         <div class="pc-desc">HTML + MP3 — tiếp nhận khi có thời gian, nghe khi bận rộn</div>
+        <div class="pc-sale-row"><span class="pc-old">299k</span><span class="pc-disc">-67%</span></div>
         <div class="pc-price">99<span>k</span></div>
         <div class="pc-unit">Tiết kiệm 59k so với mua lẻ</div>
         <ul class="pc-features">
@@ -868,6 +932,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
         <span class="pc-badge basic">Học liệu âm thanh</span>
         <div class="pc-name">Bản MP3</div>
         <div class="pc-desc">Bộ học liệu âm thanh — nghe trong lúc di chuyển, tập thể dục</div>
+        <div class="pc-sale-row"><span class="pc-old">199k</span><span class="pc-disc">-60%</span></div>
         <div class="pc-price">79<span>k</span></div>
         <div class="pc-unit">Thanh toán một lần · Sở hữu mãi mãi</div>
         <ul class="pc-features">
@@ -1074,9 +1139,10 @@ function pad(n) { return String(n).padStart(2, '0'); }
 function tick() {
   const d = Math.max(0, end - Date.now());
   const h = Math.floor(d/3600000), m = Math.floor(d%3600000/60000), s = Math.floor(d%60000/1000);
-  document.getElementById('ch').textContent = pad(h);
-  document.getElementById('cm').textContent = pad(m);
-  document.getElementById('cs').textContent = pad(s);
+  ['ch','hch','ach'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=pad(h);});
+  ['cm','hcm','acm'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=pad(m);});
+  ['cs','hcs','acs'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=pad(s);});
+  if(d===0){const bar=document.getElementById('announce-bar');if(bar)bar.style.background='rgba(40,40,40,1)';}
 }
 tick(); setInterval(tick, 1000);
 
