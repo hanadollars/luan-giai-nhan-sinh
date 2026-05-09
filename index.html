@@ -563,42 +563,32 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
 @keyframes pulse-num{0%,100%{opacity:1}50%{opacity:.7}}
 .hcd-n{animation:pulse-num 2s ease-in-out infinite}
 
-/* ── AUDIO PLAYER — INTERACTIVE ── */
-.apt-play-btn{width:36px;height:36px;border-radius:50%;flex-shrink:0;
-  background:rgba(201,168,76,.1);border:1.5px solid rgba(201,168,76,.3);
-  color:var(--gold2);cursor:pointer;font-size:13px;
+/* ── AUDIO SAMPLE PLAYER (single file) ── */
+@keyframes wave-anim{0%,100%{transform:scaleY(.3);transform-origin:bottom}50%{transform:scaleY(1);transform-origin:bottom}}
+.ap-track:hover .apt-wave rect{animation:wave-anim .75s ease-in-out infinite;}
+.ap-track:hover .apt-wave rect:nth-child(2){animation-delay:.12s}
+.ap-track:hover .apt-wave rect:nth-child(3){animation-delay:.24s}
+.ap-track:hover .apt-wave rect:nth-child(4){animation-delay:.06s}
+.ap-track:hover .apt-wave rect:nth-child(5){animation-delay:.18s}
+/* Mini player strip inside ap-header */
+.ap-sample{display:flex;align-items:center;gap:14px;
+  padding:14px 28px 16px;border-bottom:1px solid var(--border2);
+  background:rgba(201,168,76,.04);}
+.aps-label{font-size:10.5px;color:var(--gold2);font-weight:600;letter-spacing:1px;
+  text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
+.aps-btn{width:34px;height:34px;border-radius:50%;flex-shrink:0;
+  background:rgba(201,168,76,.15);border:1.5px solid var(--gold);
+  color:var(--gold2);cursor:pointer;font-size:15px;
   display:flex;align-items:center;justify-content:center;
   transition:all .2s;padding-left:2px;}
-.apt-play-btn:hover{background:rgba(201,168,76,.22);border-color:var(--gold2);transform:scale(1.1);}
-.apt-play-btn.is-playing{background:rgba(201,168,76,.2);border-color:var(--gold);padding-left:0;}
-.apt-play-btn.err-state{color:rgba(255,100,100,.8);border-color:rgba(255,100,100,.4);padding-left:0;font-size:11px;}
-.ap-track{cursor:pointer;}
-.ap-track.is-active{background:rgba(201,168,76,.06);}
-.ap-track.is-active .apt-num{color:var(--gold2);}
-.ap-track.is-active .apt-name{color:var(--paper);}
-.ap-track.is-active .apt-wave rect{fill:rgba(201,168,76,.55);}
-@keyframes wave-anim{0%,100%{transform:scaleY(.45);transform-origin:bottom}50%{transform:scaleY(1);transform-origin:bottom}}
-.ap-track.is-playing .apt-wave rect{animation:wave-anim .65s ease-in-out infinite;}
-.ap-track.is-playing .apt-wave rect:nth-child(2n){animation-delay:.1s}
-.ap-track.is-playing .apt-wave rect:nth-child(3n){animation-delay:.22s}
-.ap-track.is-playing .apt-wave rect:nth-child(4n){animation-delay:.33s}
-.ap-track.is-playing .apt-wave rect:nth-child(7n){animation-delay:.44s}
-/* Now-playing strip */
-.ap-nowplaying{display:none;padding:11px 28px;
-  background:rgba(201,168,76,.05);border-top:1px solid rgba(201,168,76,.14);
-  align-items:center;gap:12px;}
-.ap-nowplaying.show{display:flex;}
-.apnp-icon{font-size:16px;flex-shrink:0;}
-.apnp-title{font-size:12px;color:var(--gold2);font-weight:600;flex:1;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
-.apnp-progress{flex:2;height:4px;background:rgba(255,255,255,.09);
-  border-radius:2px;cursor:pointer;min-width:60px;position:relative;}
-.apnp-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));
-  border-radius:2px;width:0%;transition:width .2s linear;}
-.apnp-time{font-size:11px;color:var(--muted);letter-spacing:.4px;
-  white-space:nowrap;font-family:var(--serif);}
-.ap-no-file{font-size:11px;color:rgba(255,120,120,.7);padding:6px 28px 0;display:none;}
-.ap-no-file.show{display:block;}
+.aps-btn:hover{background:rgba(201,168,76,.3);transform:scale(1.1);}
+.aps-btn.playing{padding-left:0;}
+.aps-bar{flex:1;height:4px;background:rgba(255,255,255,.09);
+  border-radius:2px;cursor:pointer;min-width:40px;}
+.aps-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));
+  border-radius:2px;width:0%;transition:width .25s linear;}
+.aps-time{font-size:11px;color:var(--muted);white-space:nowrap;
+  font-family:var(--serif);flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -722,7 +712,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
           <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#8a6a20,#C9A84C);border:2px solid #0C0C12;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:700;margin-left:-8px">M</div>
         </div>
         <div>
-          <div style="font-size:13px;color:rgba(245,240,232,0.85);font-weight:600"><span style="color:#C9A84C;font-weight:700">1089 người</span> đã sở hữu bộ tài liệu này</div>
+          <div style="font-size:13px;color:rgba(245,240,232,0.85);font-weight:600"><span style="color:#C9A84C;font-weight:700">127 người</span> đã sở hữu bộ tài liệu này</div>
           <div style="font-size:11px;color:rgba(245,240,232,0.4);margin-top:2px">⭐⭐⭐⭐⭐ &nbsp;Đánh giá trung bình 4.9/5</div>
         </div>
       </div>
@@ -734,7 +724,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
           <!-- SPINE PANEL -->
           <div class="bk-spine-slab">
             <span class="bks-title">Luận Giải Nhân Sinh</span>
-            <span class="bks-brand">2026</span>
+            <span class="bks-brand">Hanadola</span>
           </div>
           <!-- COVER PANEL -->
           <div class="bk-cover-slab">
@@ -745,7 +735,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
               <div class="bk-corner br"></div>
             </div>
             <div class="bk-cover-inner">
-              <div class="bkc-brand">Hiểu người - Hiểu mình</div>
+              <div class="bkc-brand">Góc Tĩnh Lặng · Hanadola</div>
               <div class="bkc-orn"><span></span><i>◈</i><span></span></div>
               <div class="bkc-compass">
                 <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -778,7 +768,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
               </div>
               <div class="bkc-orn"><span></span><i>◈</i><span></span></div>
               <div class="bkc-tagline">6 Luận Giải · Bản Chất Con Người</div>
-              <div class="bkc-footer">Thay tư duy - Đổi vận mệnh</div>
+              <div class="bkc-footer">Hanadola · 2026</div>
             </div>
           </div>
         </div>
@@ -787,7 +777,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
         <div class="proof-item"><div class="proof-num">6</div><div class="proof-lbl">Luận giải</div></div>
         <div class="proof-item"><div class="proof-num">30+</div><div class="proof-lbl">Luận điểm</div></div>
         <div class="proof-item"><div class="proof-num">60+</div><div class="proof-lbl">Ví dụ thực tế</div></div>
-        <div class="proof-item"><div class="proof-num">1h+</div><div class="proof-lbl">Audio MP3</div></div>
+        <div class="proof-item"><div class="proof-num">3h+</div><div class="proof-lbl">Audio MP3</div></div>
       </div>
     </div>
   </div>
@@ -797,7 +787,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
 <div class="trust-bar">
   <div class="trust-inner">
     <div class="trust-item"><span class="trust-icon">⚡</span>Nhận tài liệu tức thì sau thanh toán</div>
-    <div class="trust-item"><span class="trust-icon">🔒</span>Thanh toán bảo mật qua Ngân hàng</div>
+    <div class="trust-item"><span class="trust-icon">🔒</span>Thanh toán bảo mật qua SePay</div>
     <div class="trust-item"><span class="trust-icon">🧾</span>Hóa đơn điện tử tự động</div>
     <div class="trust-item"><span class="trust-icon">♾️</span>Sở hữu vĩnh viễn</div>
   </div>
@@ -851,35 +841,42 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
           <div class="ap-hmeta">Tổng thời lượng: hơn 3 giờ · Giọng đọc chuyên nghiệp, trầm tĩnh</div>
         </div>
       </div>
+      <!-- ▶ Mini player — đoạn nghe thử từ Sample.mp3 -->
+      <div class="ap-sample">
+        <span class="aps-label">🎵 Nghe thử</span>
+        <button class="aps-btn" id="aps-btn" title="Phát / Dừng đoạn mẫu">▶</button>
+        <div class="aps-bar" id="aps-bar"><div class="aps-fill" id="aps-fill"></div></div>
+        <span class="aps-time" id="aps-time">0:00</span>
+      </div>
       <div class="ap-tracks">
         <div class="ap-track">
           <span class="apt-num">01</span>
-          <div class="apt-info"><div class="apt-name">Bản Chất Con Người</div><div class="apt-dur">~35 phút</div></div>
+          <div class="apt-info"><div class="apt-name">Bản Chất Con Người</div><div class="apt-dur">~6 phút</div></div>
           <svg class="apt-wave" viewBox="0 0 72 22"><rect x="0" y="7" width="3" height="8"/><rect x="5" y="3" width="3" height="16"/><rect x="10" y="5" width="3" height="12"/><rect x="15" y="2" width="3" height="18"/><rect x="20" y="6" width="3" height="10"/><rect x="25" y="4" width="3" height="14"/><rect x="30" y="7" width="3" height="8"/><rect x="35" y="1" width="3" height="20"/><rect x="40" y="5" width="3" height="12"/><rect x="45" y="3" width="3" height="16"/><rect x="50" y="6" width="3" height="10"/><rect x="55" y="4" width="3" height="14"/><rect x="60" y="7" width="3" height="8"/><rect x="65" y="3" width="3" height="16"/></svg>
         </div>
         <div class="ap-track">
           <span class="apt-num">02</span>
-          <div class="apt-info"><div class="apt-name">Cảm Xúc &amp; Lý Trí</div><div class="apt-dur">~32 phút</div></div>
+          <div class="apt-info"><div class="apt-name">Cảm Xúc &amp; Lý Trí</div><div class="apt-dur">~6 phút</div></div>
           <svg class="apt-wave" viewBox="0 0 72 22"><rect x="0" y="4" width="3" height="14"/><rect x="5" y="6" width="3" height="10"/><rect x="10" y="2" width="3" height="18"/><rect x="15" y="5" width="3" height="12"/><rect x="20" y="3" width="3" height="16"/><rect x="25" y="7" width="3" height="8"/><rect x="30" y="2" width="3" height="18"/><rect x="35" y="5" width="3" height="12"/><rect x="40" y="3" width="3" height="16"/><rect x="45" y="6" width="3" height="10"/><rect x="50" y="2" width="3" height="18"/><rect x="55" y="5" width="3" height="12"/><rect x="60" y="4" width="3" height="14"/><rect x="65" y="6" width="3" height="10"/></svg>
         </div>
         <div class="ap-track">
           <span class="apt-num">03</span>
-          <div class="apt-info"><div class="apt-name">Mối Quan Hệ Con Người</div><div class="apt-dur">~38 phút</div></div>
+          <div class="apt-info"><div class="apt-name">Mối Quan Hệ Con Người</div><div class="apt-dur">~6 phút</div></div>
           <svg class="apt-wave" viewBox="0 0 72 22"><rect x="0" y="5" width="3" height="12"/><rect x="5" y="2" width="3" height="18"/><rect x="10" y="6" width="3" height="10"/><rect x="15" y="3" width="3" height="16"/><rect x="20" y="7" width="3" height="8"/><rect x="25" y="1" width="3" height="20"/><rect x="30" y="5" width="3" height="12"/><rect x="35" y="3" width="3" height="16"/><rect x="40" y="6" width="3" height="10"/><rect x="45" y="2" width="3" height="18"/><rect x="50" y="5" width="3" height="12"/><rect x="55" y="3" width="3" height="16"/><rect x="60" y="6" width="3" height="10"/><rect x="65" y="4" width="3" height="14"/></svg>
         </div>
         <div class="ap-track">
           <span class="apt-num">04</span>
-          <div class="apt-info"><div class="apt-name">Quyền Lực &amp; Ảnh Hưởng</div><div class="apt-dur">~30 phút</div></div>
+          <div class="apt-info"><div class="apt-name">Quyền Lực &amp; Ảnh Hưởng</div><div class="apt-dur">~6 phút</div></div>
           <svg class="apt-wave" viewBox="0 0 72 22"><rect x="0" y="3" width="3" height="16"/><rect x="5" y="6" width="3" height="10"/><rect x="10" y="1" width="3" height="20"/><rect x="15" y="5" width="3" height="12"/><rect x="20" y="3" width="3" height="16"/><rect x="25" y="7" width="3" height="8"/><rect x="30" y="4" width="3" height="14"/><rect x="35" y="2" width="3" height="18"/><rect x="40" y="6" width="3" height="10"/><rect x="45" y="3" width="3" height="16"/><rect x="50" y="5" width="3" height="12"/><rect x="55" y="2" width="3" height="18"/><rect x="60" y="4" width="3" height="14"/><rect x="65" y="6" width="3" height="10"/></svg>
         </div>
         <div class="ap-track">
           <span class="apt-num">05</span>
-          <div class="apt-info"><div class="apt-name">Ranh Giới &amp; Tự Do</div><div class="apt-dur">~28 phút</div></div>
+          <div class="apt-info"><div class="apt-name">Ranh Giới &amp; Tự Do</div><div class="apt-dur">~6 phút</div></div>
           <svg class="apt-wave" viewBox="0 0 72 22"><rect x="0" y="6" width="3" height="10"/><rect x="5" y="3" width="3" height="16"/><rect x="10" y="5" width="3" height="12"/><rect x="15" y="1" width="3" height="20"/><rect x="20" y="4" width="3" height="14"/><rect x="25" y="6" width="3" height="10"/><rect x="30" y="2" width="3" height="18"/><rect x="35" y="5" width="3" height="12"/><rect x="40" y="3" width="3" height="16"/><rect x="45" y="6" width="3" height="10"/><rect x="50" y="1" width="3" height="20"/><rect x="55" y="4" width="3" height="14"/><rect x="60" y="6" width="3" height="10"/><rect x="65" y="3" width="3" height="16"/></svg>
         </div>
         <div class="ap-track">
           <span class="apt-num">06</span>
-          <div class="apt-info"><div class="apt-name">Ý Nghĩa &amp; Mục Đích</div><div class="apt-dur">~34 phút</div></div>
+          <div class="apt-info"><div class="apt-name">Ý Nghĩa &amp; Mục Đích</div><div class="apt-dur">~6 phút</div></div>
           <svg class="apt-wave" viewBox="0 0 72 22"><rect x="0" y="4" width="3" height="14"/><rect x="5" y="2" width="3" height="18"/><rect x="10" y="6" width="3" height="10"/><rect x="15" y="3" width="3" height="16"/><rect x="20" y="5" width="3" height="12"/><rect x="25" y="1" width="3" height="20"/><rect x="30" y="6" width="3" height="10"/><rect x="35" y="3" width="3" height="16"/><rect x="40" y="5" width="3" height="12"/><rect x="45" y="2" width="3" height="18"/><rect x="50" y="4" width="3" height="14"/><rect x="55" y="6" width="3" height="10"/><rect x="60" y="3" width="3" height="16"/><rect x="65" y="5" width="3" height="12"/></svg>
         </div>
       </div>
@@ -925,7 +922,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
     <div style="text-align:center;margin-bottom:28px">
       <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);border-radius:50px;padding:10px 20px">
         <span style="font-size:18px">🏆</span>
-        <span style="color:rgba(245,240,232,0.8);font-size:13px"><span style="color:#C9A84C;font-weight:700">1089 người</span> đã tin tưởng &amp; sở hữu · Đánh giá <span style="color:#C9A84C;font-weight:700">4.9★</span></span>
+        <span style="color:rgba(245,240,232,0.8);font-size:13px"><span style="color:#C9A84C;font-weight:700">127 người</span> đã tin tưởng &amp; sở hữu · Đánh giá <span style="color:#C9A84C;font-weight:700">4.9★</span></span>
       </div>
     </div>
     <div class="pricing-grid">
@@ -1214,108 +1211,51 @@ function showPol(id, btn) {
   btn.classList.add('active');
 }
 
-/* ── Audio Preview Player ── */
+/* ── Audio Sample Player — file: Sample.mp3 ── */
 (function(){
-  /* 📁 ĐẶT FILE MẪU: /audio/sample-01.mp3 … sample-06.mp3
-     (2–3 phút đầu của mỗi luận giải) bên cạnh index.html */
-  const SAMPLES = [
-    './audio/sample-01.mp3','./audio/sample-02.mp3',
-    './audio/sample-03.mp3','./audio/sample-04.mp3',
-    './audio/sample-05.mp3','./audio/sample-06.mp3'
-  ];
-  const PLAY='▶', PAUSE='⏸';
+  var btn    = document.getElementById('aps-btn');
+  var fill   = document.getElementById('aps-fill');
+  var bar    = document.getElementById('aps-bar');
+  var timeEl = document.getElementById('aps-time');
+  if(!btn) return;
 
-  /* Gắn nút play + data vào từng track */
-  const tracks = document.querySelectorAll('.ap-track');
-  tracks.forEach((t,i)=>{
-    t.dataset.idx=i;
-    t.dataset.name=t.querySelector('.apt-name')?.textContent||'';
-    const b=document.createElement('button');
-    b.className='apt-play-btn'; b.textContent=PLAY; b.title='Nghe thử';
-    t.insertBefore(b, t.firstChild);
-  });
+  var audio = new Audio('./Sample.mp3');
+  audio.preload = 'none';
 
-  /* Thêm thanh now-playing + thông báo lỗi file */
-  document.querySelector('.ap-tracks')?.insertAdjacentHTML('afterend',`
-    <p class="ap-no-file" id="ap-no-file">⚠ Chưa tìm thấy file mẫu. Đặt file vào thư mục <code>/audio/</code> bên cạnh index.html.</p>
-    <div class="ap-nowplaying" id="ap-np">
-      <span class="apnp-icon">🎵</span>
-      <span class="apnp-title" id="apnp-title">Đang phát...</span>
-      <div class="apnp-progress" id="apnp-bar"><div class="apnp-fill" id="apnp-fill"></div></div>
-      <span class="apnp-time" id="apnp-time">0:00</span>
-    </div>`);
-
-  const audio = new Audio();
-  let cur = -1;
-
-  function reset(){
-    tracks.forEach(t=>{
-      t.classList.remove('is-active','is-playing');
-      const b=t.querySelector('.apt-play-btn');
-      if(b){b.textContent=PLAY;b.classList.remove('is-playing');}
-    });
-    const np=document.getElementById('ap-np');
-    if(np) np.classList.remove('show');
-    cur=-1;
+  function fmt(s){
+    var m = Math.floor(s/60), sec = Math.floor(s%60);
+    return (m<10?'0':'')+m+':'+(sec<10?'0':'')+sec;
   }
 
-  function doPlay(i){
-    const track=tracks[i];
-    const btn=track.querySelector('.apt-play-btn');
-    if(!track||!btn) return;
-
-    /* Toggle pause nếu đang phát track này */
-    if(cur===i && !audio.paused){
-      audio.pause(); btn.textContent=PLAY; btn.classList.remove('is-playing');
-      track.classList.remove('is-playing'); return;
-    }
-    /* Resume nếu bị pause */
-    if(cur===i && audio.paused){
-      audio.play(); btn.textContent=PAUSE; btn.classList.add('is-playing');
-      track.classList.add('is-playing'); return;
-    }
-
-    reset(); cur=i;
-    audio.src=SAMPLES[i];
-    document.getElementById('ap-no-file')?.classList.remove('show');
-
-    audio.play().then(()=>{
-      btn.textContent=PAUSE; btn.classList.add('is-playing');
-      track.classList.add('is-active','is-playing');
-      const np=document.getElementById('ap-np');
-      if(np){np.classList.add('show'); document.getElementById('apnp-title').textContent=track.dataset.name;}
-    }).catch(()=>{
-      reset();
-      document.getElementById('ap-no-file')?.classList.add('show');
-    });
+  function setPlaying(on){
+    btn.textContent = on ? '⏸' : '▶';
+    if(on) btn.classList.add('playing'); else btn.classList.remove('playing');
   }
 
-  /* Click delegation */
-  document.querySelector('.ap-tracks')?.addEventListener('click',e=>{
-    const btn=e.target.closest('.apt-play-btn');
-    if(btn){const t=btn.closest('.ap-track'); if(t) doPlay(+t.dataset.idx);}
-  });
-
-  /* Tiến trình */
-  audio.addEventListener('timeupdate',()=>{
-    if(!audio.duration) return;
-    const pct=audio.currentTime/audio.duration*100;
-    const fill=document.getElementById('apnp-fill');
-    if(fill) fill.style.width=pct+'%';
-    const time=document.getElementById('apnp-time');
-    if(time){
-      const f=t=>String(Math.floor(t/60)).padStart(2,'0')+':'+String(Math.floor(t%60)).padStart(2,'0');
-      time.textContent=f(audio.currentTime)+(audio.duration?' / '+f(audio.duration):'');
+  btn.addEventListener('click', function(){
+    if(audio.paused){
+      audio.play().then(function(){ setPlaying(true); }).catch(function(){ setPlaying(false); });
+    } else {
+      audio.pause(); setPlaying(false);
     }
   });
 
-  audio.addEventListener('ended', reset);
-
-  /* Seek khi click thanh progress */
-  document.getElementById('apnp-bar')?.addEventListener('click',e=>{
+  audio.addEventListener('timeupdate', function(){
     if(!audio.duration) return;
-    const r=e.currentTarget.getBoundingClientRect();
-    audio.currentTime=(e.clientX-r.left)/r.width*audio.duration;
+    if(fill) fill.style.width = (audio.currentTime/audio.duration*100)+'%';
+    if(timeEl) timeEl.textContent = fmt(audio.currentTime)+' / '+fmt(audio.duration);
+  });
+
+  audio.addEventListener('ended', function(){
+    setPlaying(false);
+    if(fill) fill.style.width = '0%';
+    if(timeEl) timeEl.textContent = '0:00';
+  });
+
+  if(bar) bar.addEventListener('click', function(e){
+    if(!audio.duration) return;
+    var r = bar.getBoundingClientRect();
+    audio.currentTime = (e.clientX - r.left) / r.width * audio.duration;
   });
 })();
 </script>
